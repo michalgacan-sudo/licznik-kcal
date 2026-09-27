@@ -287,7 +287,7 @@ pl: {
   ai_prompt_many:'Jeśli opis zawiera kilka produktów (np. cały posiłek), zwróć tablicę JSON takich obiektów i w polu "amount" podaj zjedzoną ilość w g (lub sztukach dla "piece").',
   products:'Produkty', templates:'Szablony', new_product:'Nowy produkt', edit_product:'Edytuj produkt', shared:'wspólny', copy_to_mine:'Kopiuj do moich',
   readonly_food:'Ten produkt należy do innej osoby. Możesz go skopiować do swoich i edytować kopię.',
-  lib_hint:'Produkty trafiają tu automatycznie przy wpisywaniu posiłków („Zapisz w bibliotece”).', tpl_hint:'Szablon powstaje z posiłku złożonego: rozwiń posiłek → „Zapisz jako szablon”.',
+  lib_hint:'Produkty trafiają tu automatycznie przy wpisywaniu posiłków („Zapisz w bibliotece”).', tpl_hint:'Dodaj przepis przyciskiem +. Aby inni go widzieli, zaznacz „Udostępnij wszystkim”.',
   tpl_edit_hint:'Aby zmienić składniki: dodaj szablon do dnia, zmień go i zapisz ponownie jako szablon.', add_to_day:'Dodaj do dnia',
   account:'Konto', display_name:'Wyświetlana nazwa', admin:'Administrator', language:'Język', lang_pl:'Polski', lang_de:'Deutsch', lang_en:'English',
   theme:'Motyw', theme_auto:'Auto', theme_light:'Jasny', theme_dark:'Ciemny',
@@ -297,7 +297,7 @@ pl: {
   grp_core:'Podstawowe', grp_basic:'Z etykiety', grp_fats:'Tłuszcze (zaawansowane)', grp_vit:'Witaminy', grp_min:'Składniki mineralne', grp_other:'Inne', grp_custom:'Własne składniki',
   custom_name:'Nazwa, np. Kreatyna', custom_hint:'Własne składniki możesz wpisywać w produktach i ustawiać dla nich cele.',
   meal_types:'Typy posiłków', add_meal_type:'Dodaj typ', new_meal_type:'Nowy posiłek', meal_types_hint:'Zmień nazwę, kolejność (strzałka w górę) lub usuń.',
-  data:'Dane', export_json:'Eksport JSON (kopia zapasowa)', export_csv:'Eksport CSV (sumy dzienne)', export_hint:'Eksport obejmuje tylko Twoje dane.',
+  data:'Dane', export_json:'Eksport JSON (kopia zapasowa)', export_csv:'Eksport CSV (sumy dzienne)', export_hint:'Eksport JSON obejmuje Twoje dane i wspólną listę zakupów.',
   view_diary:'Dziennik', admin_add_hint:'Nowych użytkowników dodajesz w panelu Supabase (Authentication → Users → Add user). Instrukcja: ANLEITUNG.md.',
   demo_reset:'Zresetuj dane demo', date:'Data', kcal_rule:'kcal z etykiety; bez kcal: 4/4/9 kcal/g',
   n_kcal:'Kalorie', n_carbs:'Węglowodany', n_protein:'Białko', n_fat:'Tłuszcz', n_sugar:'w tym cukry', n_fiber:'Błonnik', n_salt:'Sól',
@@ -365,7 +365,7 @@ de: {
   ai_prompt_many:'Enthält die Beschreibung mehrere Lebensmittel (z. B. eine ganze Mahlzeit), gib ein JSON-Array solcher Objekte zurück und trage in "amount" die gegessene Menge in g ein (bzw. Stück bei "piece").',
   products:'Produkte', templates:'Vorlagen', new_product:'Neues Produkt', edit_product:'Produkt bearbeiten', shared:'gemeinsam', copy_to_mine:'Zu meinen kopieren',
   readonly_food:'Dieses Produkt gehört einer anderen Person. Du kannst es zu deinen kopieren und die Kopie bearbeiten.',
-  lib_hint:'Produkte landen hier automatisch beim Eintragen von Mahlzeiten („In Bibliothek speichern“).', tpl_hint:'Eine Vorlage entsteht aus einer zusammengesetzten Mahlzeit: Mahlzeit aufklappen → „Als Vorlage speichern“.',
+  lib_hint:'Produkte landen hier automatisch beim Eintragen von Mahlzeiten („In Bibliothek speichern“).', tpl_hint:'Mit + ein Rezept anlegen. Damit andere es sehen, beim Speichern die Freigabe einschalten.',
   tpl_edit_hint:'Zum Ändern der Komponenten: Vorlage zum Tag hinzufügen, anpassen und erneut als Vorlage speichern.', add_to_day:'Zum Tag hinzufügen',
   account:'Konto', display_name:'Anzeigename', admin:'Administrator', language:'Sprache', lang_pl:'Polski', lang_de:'Deutsch', lang_en:'English',
   theme:'Design', theme_auto:'Auto', theme_light:'Hell', theme_dark:'Dunkel',
@@ -375,7 +375,7 @@ de: {
   grp_core:'Grundwerte', grp_basic:'Vom Etikett', grp_fats:'Fette (erweitert)', grp_vit:'Vitamine', grp_min:'Mineralstoffe', grp_other:'Sonstiges', grp_custom:'Eigene Nährstoffe',
   custom_name:'Name, z. B. Kreatin', custom_hint:'Eigene Nährstoffe kannst du bei Produkten eintragen und dafür Ziele festlegen.',
   meal_types:'Mahlzeitentypen', add_meal_type:'Typ hinzufügen', new_meal_type:'Neue Mahlzeit', meal_types_hint:'Umbenennen, Reihenfolge ändern (Pfeil nach oben) oder löschen.',
-  data:'Daten', export_json:'Export JSON (Backup)', export_csv:'Export CSV (Tagessummen)', export_hint:'Der Export enthält nur deine eigenen Daten.',
+  data:'Daten', export_json:'Export JSON (Backup)', export_csv:'Export CSV (Tagessummen)', export_hint:'Der JSON-Export enthält deine Daten und die gemeinsame Einkaufsliste.',
   view_diary:'Tagebuch', admin_add_hint:'Neue Nutzer legst du im Supabase-Dashboard an (Authentication → Users → Add user). Anleitung: ANLEITUNG.md.',
   demo_reset:'Demo-Daten zurücksetzen', date:'Datum', kcal_rule:'kcal vom Etikett; ohne kcal: 4/4/9 kcal/g',
   n_kcal:'Kalorien', n_carbs:'Kohlenhydrate', n_protein:'Eiweiß', n_fat:'Fett', n_sugar:'davon Zucker', n_fiber:'Ballaststoffe', n_salt:'Salz',
@@ -443,7 +443,7 @@ en: {
   ai_prompt_many:'If the description contains several foods (e.g. a whole meal), return a JSON array of such objects and put the eaten amount in g in "amount" (or pieces for "piece").',
   products:'Products', templates:'Templates', new_product:'New product', edit_product:'Edit product', shared:'shared', copy_to_mine:'Copy to mine',
   readonly_food:'This product belongs to someone else. You can copy it to yours and edit the copy.',
-  lib_hint:'Products land here automatically when you log meals (“Save to library”).', tpl_hint:'A template is created from a composite meal: expand the meal → “Save as template”.',
+  lib_hint:'Products land here automatically when you log meals (“Save to library”).', tpl_hint:'Create a recipe with +. Enable sharing when saving so others can see it.',
   tpl_edit_hint:'To change components: add the template to a day, adjust it and save it as a template again.', add_to_day:'Add to day',
   account:'Account', display_name:'Display name', admin:'Administrator', language:'Language', lang_pl:'Polski', lang_de:'Deutsch', lang_en:'English',
   theme:'Theme', theme_auto:'Auto', theme_light:'Light', theme_dark:'Dark',
@@ -453,7 +453,7 @@ en: {
   grp_core:'Basics', grp_basic:'From the label', grp_fats:'Fats (advanced)', grp_vit:'Vitamins', grp_min:'Minerals', grp_other:'Other', grp_custom:'Custom nutrients',
   custom_name:'Name, e.g. Creatine', custom_hint:'Custom nutrients can be entered on products and given goals.',
   meal_types:'Meal types', add_meal_type:'Add type', new_meal_type:'New meal', meal_types_hint:'Rename, reorder (up arrow) or delete.',
-  data:'Data', export_json:'Export JSON (backup)', export_csv:'Export CSV (daily totals)', export_hint:'The export contains only your own data.',
+  data:'Data', export_json:'Export JSON (backup)', export_csv:'Export CSV (daily totals)', export_hint:'The JSON export includes your data and the shared shopping list.',
   view_diary:'Diary', admin_add_hint:'Add new users in the Supabase dashboard (Authentication → Users → Add user). Guide: ANLEITUNG.md.',
   demo_reset:'Reset demo data', date:'Date', kcal_rule:'kcal from label; without kcal: 4/4/9 kcal/g',
   n_kcal:'Calories', n_carbs:'Carbohydrates', n_protein:'Protein', n_fat:'Fat', n_sugar:'of which sugars', n_fiber:'Fibre', n_salt:'Salt',
@@ -464,6 +464,16 @@ en: {
 }
 };
 
+Object.assign(I18N.pl, {"templates": "Posiłki", "save_template": "Zapisz jako posiłek", "from_template": "Z zapisanych posiłków", "no_templates": "Brak zapisanych posiłków. Dodaj przepis lub zapisz posiłek z dziennika.", "template_saved": "Posiłek zapisany.", "recipe_new": "Nowy przepis", "recipe_steps": "Sposób przygotowania", "recipe_batch": "Liczba porcji w całym przepisie", "recipe_eat": "Ile porcji dodajesz?", "recipe_hint": "Składniki i wartości dotyczą całego przepisu. Przy dodawaniu obliczamy wybrane porcje.", "portion_apply": "Przelicz porcje", "portion_invalid": "Podaj dodatnią liczbę porcji.", "portion_hint": "Podaj liczbę porcji w aktualnych składnikach oraz ile z nich zjadasz. Przeliczenie zmienia ilości składników.", "piece_hint": "Dla całej sztuki wpisz jej masę powyżej. Waga owoców i warzyw zależy od wielkości; najlepiej zważyć.", "supplement": "Dodaj suplement", "supplement_amount": "Ilość składnika w jednej dawce", "supplement_timing": "Kiedy przyjmujesz?", "supplement_hint": "Wpisz ilość składnika z etykiety, np. 185 mg magnezu. Każda zaznaczona pora otrzyma osobny wpis. To zapis przyjętej ilości, nie zalecenie dawkowania.", "n_creatine": "Kreatyna", "scan_unsupported": "Aparat nie jest dostępny. Wpisz kod ręcznie.", "scan_hint": "Zeskanuj kod kreskowy produktu. QR musi zawierać kod produktu lub link Open Food Facts; inne linki nie są otwierane.", "scan_invalid": "Ten kod nie zawiera obsługiwanego numeru produktu.", "scan_err": "Nie można uruchomić aparatu. Sprawdź uprawnienia lub wpisz kod ręcznie.", "off_err": "Baza online chwilowo nie odpowiada. Spróbuj kodu kreskowego lub dodaj produkt ręcznie.", "off_rate": "Limit wyszukiwań. Odczekaj około minutę i spróbuj ponownie."});
+Object.assign(I18N.de, {"templates": "Mahlzeiten", "save_template": "Als Mahlzeit speichern", "from_template": "Aus gespeicherten Mahlzeiten", "no_templates": "Noch keine Mahlzeiten. Lege ein Rezept an oder speichere eine Mahlzeit aus dem Tagebuch.", "template_saved": "Mahlzeit gespeichert.", "recipe_new": "Neues Rezept", "recipe_steps": "Zubereitung", "recipe_batch": "Portionen im gesamten Rezept", "recipe_eat": "Wie viele Portionen hinzufügen?", "recipe_hint": "Zutaten und Werte gelten für das ganze Rezept. Beim Hinzufügen berechnen wir die gewählten Portionen.", "portion_apply": "Portionen umrechnen", "portion_invalid": "Gib eine positive Portionsanzahl ein.", "portion_hint": "Gib an, wie viele Portionen die aktuellen Zutaten ergeben und wie viele du isst. Die Umrechnung verändert die Zutatenmengen.", "piece_hint": "Trage für ganze Stücke oben das Stückgewicht ein. Obst und Gemüse sind unterschiedlich groß; am besten wiegen.", "supplement": "Supplement hinzufügen", "supplement_amount": "Nährstoffmenge pro Einnahme", "supplement_timing": "Wann nimmst du es ein?", "supplement_hint": "Trage die Menge laut Etikett ein, z. B. 185 mg Magnesium. Jede ausgewählte Tageszeit erhält einen eigenen Eintrag. Dies protokolliert die Einnahme und ist keine Dosierungsempfehlung.", "n_creatine": "Kreatin", "scan_unsupported": "Keine Kamera verfügbar. Gib den Code manuell ein.", "scan_hint": "Scanne den Produktbarcode. QR muss eine Produktnummer oder einen Open-Food-Facts-Link enthalten; andere Links werden nicht geöffnet.", "scan_invalid": "Dieser Code enthält keine unterstützte Produktnummer.", "scan_err": "Kamera konnte nicht gestartet werden. Prüfe die Berechtigung oder gib den Code ein.", "off_err": "Die Online-Datenbank antwortet gerade nicht. Versuche einen Barcode oder lege das Produkt manuell an.", "off_rate": "Suchlimit erreicht. Warte etwa eine Minute und versuche es erneut."});
+Object.assign(I18N.en, {"templates": "Meals", "save_template": "Save as meal", "from_template": "From saved meals", "no_templates": "No saved meals. Create a recipe or save a meal from your diary.", "template_saved": "Meal saved.", "recipe_new": "New recipe", "recipe_steps": "Instructions", "recipe_batch": "Servings in the entire recipe", "recipe_eat": "How many servings to add?", "recipe_hint": "Ingredients and values describe the entire recipe. We calculate the selected servings when adding it.", "portion_apply": "Scale servings", "portion_invalid": "Enter a positive number of servings.", "portion_hint": "Enter how many servings the current ingredients make and how many you eat. Scaling changes ingredient amounts.", "piece_hint": "For whole pieces, enter their weight above. Fruit and vegetable sizes vary; weighing is best.", "supplement": "Add supplement", "supplement_amount": "Nutrient amount per dose", "supplement_timing": "When do you take it?", "supplement_hint": "Enter the nutrient amount from the label, e.g. 185 mg magnesium. Each selected meal time gets a separate entry. This records intake, not a dosage recommendation.", "n_creatine": "Creatine", "scan_unsupported": "Camera unavailable. Enter the code manually.", "scan_hint": "Scan the product barcode. QR must contain a product code or Open Food Facts link; other links are not opened.", "scan_invalid": "This code does not contain a supported product number.", "scan_err": "Camera could not start. Check permission or enter the code manually.", "off_err": "The online database is not responding. Try a barcode or add the product manually.", "off_rate": "Search limit reached. Wait about a minute and try again."});
+
+Object.assign(I18N.pl, {"shopping": "Zakupy", "shopping_name": "Produkt", "shopping_quantity": "Ilość (np. 2 szt., 500 g)", "shopping_private": "Moja lista", "shopping_shared": "Lista rodzinna", "shopping_hint": "Lista rodzinna jest widoczna dla wszystkich kont w aplikacji. Każdy może oznaczać zakupy; usuwać wpis może jego autor.", "shopping_empty": "Lista jest pusta.", "shopping_refresh": "Odśwież", "shopping_category": "Kategoria", "shop_produce": "Owoce i warzywa", "shop_chilled": "Nabiał i chłodzone", "shop_pantry": "Produkty suche", "shop_other": "Inne", "shopping_search": "Szukaj na liście…"});
+Object.assign(I18N.de, {"shopping": "Einkauf", "shopping_name": "Produkt", "shopping_quantity": "Menge (z. B. 2 Stück, 500 g)", "shopping_private": "Meine Liste", "shopping_shared": "Familienliste", "shopping_hint": "Die Familienliste sehen alle App-Konten. Jeder kann Einkäufe abhaken; löschen kann sie der Verfasser.", "shopping_empty": "Die Liste ist leer.", "shopping_refresh": "Aktualisieren", "shopping_category": "Kategorie", "shop_produce": "Obst und Gemüse", "shop_chilled": "Milchprodukte und Kühlware", "shop_pantry": "Vorräte", "shop_other": "Sonstiges", "shopping_search": "Liste durchsuchen…"});
+Object.assign(I18N.en, {"shopping": "Shopping", "shopping_name": "Product", "shopping_quantity": "Quantity (e.g. 2 pieces, 500 g)", "shopping_private": "My list", "shopping_shared": "Family list", "shopping_hint": "All app accounts can see the family list and check off purchases. Only the author can delete an item.", "shopping_empty": "The list is empty.", "shopping_refresh": "Refresh", "shopping_category": "Category", "shop_produce": "Fruit and vegetables", "shop_chilled": "Dairy and chilled", "shop_pantry": "Pantry", "shop_other": "Other", "shopping_search": "Search list…"});
+Object.assign(I18N.pl, {"ul_title": "Opcjonalne ostrzeżenia o górnej granicy spożycia", "ul_enable": "Włącz dla zdrowej osoby dorosłej 18+, poza ciążą i karmieniem", "ul_note": "UL dotyczy długotrwałego dziennego spożycia, nie jest celem ani dokładną dawką toksyczną. Liczymy tylko zjedzone wpisy. Brakujące wartości nie są zerem. Nie oceniamy zapotrzebowania ani leczenia. Witamina D: D2/D3, nie kalcydiol.", "ul_over": "Przekroczona górna granica — sprawdź dawki i skonsultuj regularne przekraczanie z lekarzem lub farmaceutą.", "ul_below": "Wpisane wartości nie przekraczają UL; to nie potwierdza odpowiedniej dawki.", "ul_unknown": "Niepełne dane — brak oceny bezpieczeństwa.", "ul_source": "Źródło: EFSA, tabela UL, sierpień 2025"});
+Object.assign(I18N.de, {"ul_title": "Optionale Warnungen zu Aufnahme-Obergrenzen", "ul_enable": "Für gesunde Erwachsene ab 18 aktivieren, außerhalb von Schwangerschaft und Stillzeit", "ul_note": "UL gilt für die langfristige tägliche Aufnahme und ist weder Ziel noch genaue toxische Dosis. Nur gegessene Einträge zählen. Fehlende Werte sind keine Nullwerte. Bedarf und Behandlungen werden nicht beurteilt. Vitamin D: D2/D3, kein Calcidiol.", "ul_over": "Obergrenze überschritten — Mengen prüfen und regelmäßige Überschreitungen ärztlich oder in der Apotheke besprechen.", "ul_below": "Erfasste Werte überschreiten den UL nicht; dies bestätigt keine passende Dosierung.", "ul_unknown": "Unvollständige Daten — keine Sicherheitsbewertung.", "ul_source": "Quelle: EFSA, UL-Tabelle, August 2025"});
+Object.assign(I18N.en, {"ul_title": "Optional upper intake warnings", "ul_enable": "Enable for healthy adults 18+, excluding pregnancy and breastfeeding", "ul_note": "UL concerns long-term daily intake, not a target or exact toxic dose. Only eaten entries count. Missing values are not zero. This does not assess requirements or treatment. Vitamin D: D2/D3, not calcidiol.", "ul_over": "Upper level exceeded — check amounts and discuss repeated excess with a clinician or pharmacist.", "ul_below": "Recorded values do not exceed the UL; this does not confirm an appropriate dose.", "ul_unknown": "Incomplete data — no safety assessment.", "ul_source": "Source: EFSA UL table, August 2025"});
 /* =====================================================================
    KONFIGURACJA – wklej tutaj dane ze swojego projektu Supabase
    (Supabase → Project Settings → API)
@@ -513,6 +523,7 @@ const NUTRIENTS = [
   {k:'se',      u:'µg',   g:'min',   def:'min', off:'selenium', offMul:1e6},
   {k:'caffeine',u:'mg',   g:'other', def:'max', off:'caffeine', offMul:1000},
   {k:'alcohol', u:'g',    g:'other', def:'max'},
+  {k:'creatine', u:'g', g:'other', def:'min'},
   {k:'water',   u:'ml',   g:'other', def:'min'}
 ];
 const NUT_BY_KEY = Object.fromEntries(NUTRIENTS.map(n => [n.k, n]));
@@ -531,6 +542,7 @@ function defaultSettings(){
     custom: [],
     mealTypes: DEFAULT_MEAL_TYPES.map(m => ({...m})),
     weight: {goal:null, entries:[]},
+    upperWarnings: false,
     advanced: false
   };
 }
@@ -545,6 +557,7 @@ function normSettings(s){
     custom: Array.isArray(s.custom) ? s.custom : d.custom,
     mealTypes: Array.isArray(s.mealTypes) && s.mealTypes.length ? s.mealTypes : d.mealTypes,
     weight: normalizeWeight(s.weight),
+    upperWarnings: s.upperWarnings === true,
     advanced: !!s.advanced
   };
 }
@@ -748,23 +761,54 @@ function normalizeAiFood(o, customList){
 /* =====================================================================
    Open Food Facts
    ===================================================================== */
+const onlineCache = new Map();
+async function onlineJson(url){
+  if (onlineCache.has(url)) return clone(onlineCache.get(url));
+  const controller=new AbortController(), timer=setTimeout(()=>controller.abort(),15000);
+  try {
+    const response=await fetch(url,{signal:controller.signal});
+    if(response.status===429) throw new Error('rate');
+    if(response.status===404) return null;
+    if(!response.ok) throw new Error('http '+response.status);
+    const data=await response.json();
+    if(onlineCache.size>100) onlineCache.clear();
+    onlineCache.set(url,data); return clone(data);
+  } finally {clearTimeout(timer);}
+}
+function productCode(raw){
+  const value=String(raw||'').trim();
+  if (/^\d{8}$|^\d{12,14}$/.test(value)) return value;
+  try { const u=new URL(value); if(u.protocol==='https:' && /(^|\.)openfoodfacts\.org$/.test(u.hostname)){ const match=u.pathname.match(/\/(?:product|produkt|produit)\/(\d{8}|\d{12,14})(?:\/|$)/); if(match) return match[1]; } } catch(e){}
+  return null;
+}
+let scannerLibrary;
+function loadScanner(){
+  if(window.ZXingBrowser) return Promise.resolve(window.ZXingBrowser);
+  if(!scannerLibrary) scannerLibrary=new Promise((resolve,reject)=>{
+    const script=document.createElement('script');script.src='https://cdn.jsdelivr.net/npm/@zxing/browser@0.1.5/umd/zxing-browser.min.js';
+    script.integrity='sha384-ylLhng89kD62+PVK1cjm4rAYg69zDlGrbbSfAE2Eb8Xqf8RoAQCMcRoUXZh7pAPC';script.crossOrigin='anonymous';
+    script.onload=()=>resolve(window.ZXingBrowser);script.onerror=()=>{scannerLibrary=null;script.remove();reject(new Error('scanner'));};document.head.appendChild(script);
+  });
+  return scannerLibrary;
+}
 const OFF = {
   fields: 'code,product_name,product_name_pl,product_name_de,product_name_en,generic_name,brands,quantity,serving_quantity,nutriments',
   host(cc){ return cc && cc !== 'world' ? `https://${cc}.openfoodfacts.org` : 'https://world.openfoodfacts.org'; },
   async search(q, lang, cc){
-    const url = `${this.host(cc)}/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=25&lc=${lang}&fields=${this.fields}`;
-    const r = await fetch(url);
-    if (r.status === 429) throw new Error('rate');
-    if (!r.ok) throw new Error('http '+r.status);
-    const j = await r.json();
-    return (j.products || []).map(p => this.toFood(p, lang)).filter(Boolean);
+    const country=cc==='pl'?'en:poland':cc==='de'?'en:germany':null;
+    const query=q+(country?' countries_tags:"'+country+'"':'');
+    try{
+      const j=await onlineJson(`https://search.openfoodfacts.org/search?q=${encodeURIComponent(query)}&page_size=25&langs=${lang},en&fields=${this.fields}`);
+      return (j && j.hits || []).map(p=>this.toFood(p,lang)).filter(Boolean);
+    }catch(err){
+      if(err.message==='rate')throw err;
+      const url=`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(q)}&search_simple=1&action=process&json=1&page_size=25&lc=${lang}&fields=${this.fields}${country?'&tagtype_0=countries&tag_contains_0=contains&tag_0='+encodeURIComponent(country):''}`;
+      const j=await onlineJson(url);return (j && j.products || []).map(p=>this.toFood(p,lang)).filter(Boolean);
+    }
   },
   async byCode(code, lang){
     const url = `https://world.openfoodfacts.org/api/v2/product/${encodeURIComponent(code)}.json?fields=${this.fields}&lc=${lang}`;
-    const r = await fetch(url);
-    if (r.status === 404) return null;
-    if (!r.ok) throw new Error('http '+r.status);
-    const j = await r.json();
+    const j = await onlineJson(url);
     if (!j || j.status === 0 || !j.product) return null;
     return this.toFood({...j.product, code: j.code || code}, lang);
   },
@@ -840,6 +884,10 @@ class SupabaseApi {
   async insertFood(f){ return this._t(this.sb.from('foods').insert(f).select().single()); }
   async updateFood(id, patch){ return this._t(this.sb.from('foods').update(patch).eq('id', id).select().single()); }
   async deleteFood(id){ return this._t(this.sb.from('foods').delete().eq('id', id)); }
+  async listShopping(shared){ return this._all(()=>this.sb.from('shopping_items').select('*').eq('shared',shared).order('created_at').order('id')); }
+  async addShopping(row){return this._t(this.sb.from('shopping_items').insert(row).select().single());}
+  async checkShopping(id,checked){return this._t(this.sb.from('shopping_items').update({checked}).eq('id',id).select().single());}
+  async deleteShopping(id){return this._t(this.sb.from('shopping_items').delete().eq('id',id));}
   async allMeals(userId){ return this._all(() => this.sb.from('meals').select('*').eq('user_id', userId).order('day').order('id')); }
 }
 
@@ -890,6 +938,10 @@ class DemoApi {
     };
   }
   _me(){ return this.db.session; }
+  async listShopping(shared){return clone((this.db.shopping||[]).filter(x=>x.shared===shared && (shared||x.owner===this.db.session.id)));}
+  async addShopping(row){const item={...row,id:uid(),owner:this.db.session.id,checked:false,created_at:new Date().toISOString()};(this.db.shopping||= []).push(item);this.save();return clone(item);}
+  async checkShopping(id,checked){const row=(this.db.shopping||[]).find(x=>x.id===id);row.checked=checked;this.save();return clone(row);}
+  async deleteShopping(id){this.db.shopping=(this.db.shopping||[]).filter(x=>x.id!==id||x.owner!==this.db.session.id);this.save();}
   async session(){ return this.db.session; }
   onAuth(cb){ this.cbs.push(cb); }
   async signIn(email, password){
@@ -1225,11 +1277,12 @@ function renderShell(){
     <nav class="nav"><div class="nav-in">
       <button data-tab="day">${IC.day}<span>${esc(t('tab_day'))}</span></button>
       <button data-tab="lib">${IC.lib}<span>${esc(t('tab_lib'))}</span></button>
+      <button data-tab="shop">${IC.lib}<span>${esc(t('shopping'))}</span></button>
       <button data-tab="set">${IC.cog}<span>${esc(t('tab_set'))}</span></button>
     </div></nav>`;
-  $$('.nav [data-tab]').forEach(b => b.onclick = () => { S.tab = b.dataset.tab; renderView(); window.scrollTo(0,0); });
+  $$('.nav [data-tab]').forEach(b => b.onclick = async () => { S.tab = b.dataset.tab; if(S.tab==='lib'){try{await loadFoods();}catch(err){toast(errMsg(err),true);}} renderView(); window.scrollTo(0,0); });
   $('#fab').onclick = () => {
-    if (S.tab === 'lib') openFoodEditor(null);
+    if (S.tab === 'lib'){ if(LIB.seg==='template') openRecipeEditor(null); else openFoodEditor(null); }
     else openMealEditor(null);
   };
   window.onscroll = () => { const tb = $('#topbar'); if (tb) tb.classList.toggle('scrolled', window.scrollY > 4); };
@@ -1238,16 +1291,17 @@ function renderShell(){
 function renderView(){
   $$('.nav [data-tab]').forEach(b => b.classList.toggle('on', b.dataset.tab === S.tab));
   const fab = $('#fab');
-  if (fab) fab.classList.toggle('hidden', S.tab === 'set' || (S.tab === 'day' && readOnly()));
+  if (fab) fab.classList.toggle('hidden', (S.tab === 'set' || S.tab === 'shop') || (S.tab === 'day' && readOnly()));
   renderTopbar();
   if (S.tab === 'day') renderDay();
   else if (S.tab === 'lib') renderLibrary();
+  else if (S.tab === 'shop') renderShopping();
   else renderSettings();
 }
 function renderTopbar(){
   const tb = $('#topbar'); if (!tb) return;
   const viewP = S.profiles.find(p => p.id === S.viewId);
-  const title = S.tab === 'day' ? t('day_plan') : S.tab === 'lib' ? t('tab_lib') : t('tab_set');
+  const title = S.tab === 'day' ? t('day_plan') : S.tab === 'lib' ? t('tab_lib') : S.tab === 'shop' ? t('shopping') : t('tab_set');
   let html = `<div class="row"><div class="brand grow">${esc(title)}</div>
     ${S.api.demo ? `<span class="tag plan">DEMO</span>` : ''}
     ${S.isAdmin && S.tab === 'day' ? `<button class="iconbtn" id="whoBtn" aria-label="${esc(t('admin_view'))}">${IC.user}</button>` : ''}</div>`;
@@ -1297,7 +1351,7 @@ function renderDay(){
   const eaten = dayTotals(S.meals, 'eaten');
   const planned = dayTotals(S.meals, 'planned');
   const all = sumInto(sumInto({}, eaten), planned);
-  let html = summaryCard(eaten, planned, all, st) + weightCard(st, readOnly());
+  let html = summaryCard(eaten, planned, all, st) + weightCard(st, readOnly()) + (st.upperWarnings ? upperLimitCard(S.meals) : '');
   const types = st.mealTypes.map(m => m.id);
   const extraTypes = [...new Set(S.meals.map(m => m.meal_type))].filter(x => !types.includes(x));
   for (const type of [...types, ...extraTypes]){
@@ -1541,12 +1595,7 @@ function openCopy(meals){
   };
 }
 
-async function saveAsTemplate(m){
-  try {
-    await S.api.insertFood({kind:'template', name: mealTitle(m), items: clone(m.items), meal_type: m.meal_type, basis:'100g', n:{}, shared:false, source:'manual'});
-    await loadFoods(); toast(t('template_saved'));
-  } catch(err){ toast(errMsg(err), true); }
-}
+function saveAsTemplate(m){ openRecipeEditor(null, {name:mealTitle(m),items:clone(m.items),meal_type:m.meal_type}); }
 
 /* =====================================================================
    Pozycje (produkty w posiłku) – edytor wielokrotnego użytku
@@ -1562,7 +1611,7 @@ function newItem(){
 }
 function itemFromFood(f){
   return {id:uid(), name:f.name, brand:f.brand||'', barcode:f.barcode||null, food_id:f.id||null, source:f.source||'manual',
-    basis:f.basis||'100g', piece_g:f.piece_g ?? null, amount: f.basis === 'piece' ? 1 : 100, unit: defaultUnit(f.basis||'100g'),
+    basis:f.basis||'100g', piece_g:f.piece_g ?? null, amount: f.basis === 'piece' || parseNum(f.piece_g) > 0 ? 1 : 100, unit: f.basis === 'piece' || parseNum(f.piece_g) > 0 ? 'pc' : defaultUnit(f.basis||'100g'),
     n: clone(f.n||{}), _save: !f.id, _share:false, _upd:false};
 }
 function stripItem(it){
@@ -1645,7 +1694,7 @@ function mountItemEditor(host, opts){
   }
   function renderForm(){
     const it = E.item;
-    const vis = visibleNutrients();
+    const vis = [...new Set([...visibleNutrients(), ...allNutrientKeys().filter(k => parseNum(it.n[k]) !== null)])];
     const rest = allNutrientKeys().filter(k => !vis.includes(k));
     const basisOpts = foodMode ? ['100g','100ml','piece'] : ['100g','100ml','piece','total'];
     const fromLib = it.food_id ? S.foods.find(f => f.id === it.food_id) : null;
@@ -1677,6 +1726,7 @@ function mountItemEditor(host, opts){
           <label class="f"><span>${esc(t('amount'))} *</span><input class="inp num" inputmode="decimal" data-f="amount" value="${esc(inputNum(parseNum(it.amount)))}"></label>
           <label class="f"><span>${esc(t('unit'))}</span><select class="inp" data-f="unit">${uo.map(u => `<option value="${u}" ${it.unit===u?'selected':''}>${esc(unitLabel(u))}</option>`).join('')}</select></label></div>`;
       }
+      if (it.basis !== 'total') h += `<div class="row wrap" style="margin-top:10px">${(parseNum(it.piece_g)>0 || it.basis==='piece') ? [0.5,1,2].map(a=>`<button type="button" class="btn small" data-quick-piece="${a}">${esc(fmt(a))} ${esc(t('unit_pc'))}</button>`).join('') : ''}${it.basis==='100g' ? [100,150,200,250].map(a=>`<button type="button" class="btn small" data-quick-g="${a}">${a} g</button>`).join('') : ''}</div>${it.basis==='100g' ? `<p class="hint">${esc(t('piece_hint'))}</p>` : ''}`;
       h += `<div class="calc" data-calc></div>`;
       if (it.basis !== 'total'){
         if (!it.food_id){
@@ -1715,6 +1765,8 @@ function mountItemEditor(host, opts){
       if (f === 'piece_g') inp.onchange = () => renderForm();
     });
     $$('[data-n]', body).forEach(inp => inp.oninput = () => { it.n[inp.dataset.n] = inp.value; updateCalc(); });
+    $$('[data-quick-piece]',body).forEach(b=>b.onclick=()=>{it.amount=Number(b.dataset.quickPiece);it.unit='pc';renderForm();});
+    $$('[data-quick-g]',body).forEach(b=>b.onclick=()=>{it.amount=Number(b.dataset.quickG);it.unit='g';renderForm();});
     $('[data-showall]', body).onclick = () => { E.showAll = !E.showAll; renderForm(); };
     updateCalc();
   }
@@ -1771,30 +1823,32 @@ function mountItemEditor(host, opts){
   }
 
   /* ---------- Open Food Facts ---------- */
-  let stream = null, scanTimer = null;
+  let stream = null, scanTimer = null, scannerControls = null, scanGeneration=0;
   function stopScan(){
+    scanGeneration++;
+    if(scannerControls){scannerControls.stop();scannerControls=null;}
     if (scanTimer){ clearInterval(scanTimer); scanTimer = null; }
     if (stream){ stream.getTracks().forEach(tr => tr.stop()); stream = null; }
   }
   E.stop = stopScan;
   function renderOff(){
     const o = E.off;
-    const canScan = 'BarcodeDetector' in window && navigator.mediaDevices;
+    const canScan = !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia);
     let h = `<div class="chips" style="margin-top:12px">${['pl','de','world'].map(c => `<button class="chip ${o.cc===c?'on':''}" data-cc="${c}">${esc(t('cc_'+c))}</button>`).join('')}</div>
       <form data-offs class="row" style="margin-top:10px"><input class="inp grow" name="q" placeholder="${esc(t('off_search_ph'))}" value="${esc(o.q)}" autocomplete="off"><button class="btn primary" type="submit">${esc(t('search'))}</button></form>
       <form data-offc class="row" style="margin-top:8px"><input class="inp grow num" name="code" inputmode="numeric" placeholder="${esc(t('barcode'))}" value="${esc(o.code)}"><button class="btn" type="submit">${esc(t('find'))}</button>
         ${canScan ? `<button class="btn" type="button" data-scan aria-label="${esc(t('scan'))}">${IC.scan}</button>` : ''}</form>
-      <div data-scanbox></div>
+      <div data-scanbox></div><p class="hint">${esc(t('scan_hint'))}</p>
       ${canScan ? '' : `<p class="hint">${esc(t('scan_unsupported'))}</p>`}
       <div data-offres style="margin-top:6px"></div>
       <p class="hint">${esc(t('off_note'))}</p>`;
     body.innerHTML = h;
     $$('[data-cc]', body).forEach(b => b.onclick = () => { o.cc = b.dataset.cc; renderOff(); });
     $('[data-offs]', body).onsubmit = async e => {
-      e.preventDefault(); o.q = e.target.q.value.trim(); if (!o.q) return;
+      e.preventDefault(); if(o.loading) return; o.q = e.target.q.value.trim(); if (!o.q) return;
       o.loading = true; o.err = null; drawOff();
       try { o.results = await OFF.search(o.q, S.lang, o.cc); }
-      catch(err){ o.err = err.message === 'rate' ? t('off_rate') : t('off_err')+' ('+errMsg(err)+')'; o.results = null; }
+      catch(err){ o.err = err.message === 'rate' ? t('off_rate') : t('off_err'); o.results = null; }
       o.loading = false; drawOff();
     };
     $('[data-offc]', body).onsubmit = async e => { e.preventDefault(); o.code = e.target.code.value.trim(); if (o.code) lookupCode(o.code); };
@@ -1803,6 +1857,8 @@ function mountItemEditor(host, opts){
   }
   async function lookupCode(code){
     const o = E.off;
+    if(o.loading) return;
+    code=productCode(code); if(!code){o.err=t('scan_invalid');drawOff();return;}
     const local = S.foods.find(f => f.barcode && f.barcode === code && f.kind === 'food');
     if (local){ toast(t('found_in_lib')); E.item = itemFromFood(local); E.tab = 'form'; render(); return; }
     o.loading = true; o.err = null; drawOff();
@@ -1811,7 +1867,7 @@ function mountItemEditor(host, opts){
       o.loading = false;
       if (!f){ o.err = t('off_notfound'); drawOff(); return; }
       pickOff(f);
-    } catch(err){ o.loading = false; o.err = t('off_err')+' ('+errMsg(err)+')'; drawOff(); }
+    } catch(err){ o.loading = false; o.err = err.message==='rate' ? t('off_rate') : t('off_err'); drawOff(); }
   }
   function pickOff(f){
     const it = itemFromFood({...f, id:null});
@@ -1829,21 +1885,27 @@ function mountItemEditor(host, opts){
     $$('[data-oi]', R).forEach(b => b.onclick = () => pickOff(o.results[Number(b.dataset.oi)]));
   }
   async function startScan(){
-    const box = $('[data-scanbox]', body);
+    const box = $('[data-scanbox]', body); stopScan(); const generation=scanGeneration;
+    box.innerHTML=`<div class="spinner"></div><button class="btn block small" data-stop>${esc(t('cancel'))}</button>`;
+    $('[data-stop]',box).onclick=()=>{stopScan();box.innerHTML='';};
     try {
-      stopScan();
-      const det = new BarcodeDetector({formats:['ean_13','ean_8','upc_a','upc_e']});
-      stream = await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});
-      box.innerHTML = `<video class="scan" playsinline muted></video><button class="btn block small" style="margin-top:6px" data-stop>${esc(t('cancel'))}</button>`;
-      const v = $('video', box); v.srcObject = stream; await v.play();
-      $('[data-stop]', box).onclick = () => { stopScan(); box.innerHTML = ''; };
-      scanTimer = setInterval(async () => {
-        try {
-          const codes = await det.detect(v);
-          if (codes.length){ const c = codes[0].rawValue; stopScan(); box.innerHTML = ''; E.off.code = c; renderOff(); lookupCode(c); }
-        } catch(e){}
-      }, 350);
-    } catch(err){ stopScan(); box.innerHTML = `<div class="err-box">${esc(t('scan_err'))}</div>`; }
+      const library=await loadScanner();
+      if(generation!==scanGeneration || !box.isConnected) return;
+      box.innerHTML=`<video class="scan" playsinline muted></video><button class="btn block small" data-stop>${esc(t('cancel'))}</button>`;
+      $('[data-stop]',box).onclick=()=>{stopScan();box.innerHTML='';};
+      let found=false;
+      const reader=new library.BrowserMultiFormatReader();
+      const controls=await reader.decodeFromVideoDevice(undefined,$('video',box),(result,error,control)=>{
+        if(generation!==scanGeneration || !box.isConnected){control.stop();return;}
+        if(result && !found){
+          found=true;control.stop();stopScan();const code=productCode(result.getText());
+          box.innerHTML='';
+          if(!code){E.off.err=t('scan_invalid');drawOff();return;}
+          E.off.code=code;renderOff();lookupCode(code);
+        }
+      });
+      if(generation!==scanGeneration || !box.isConnected || found) controls.stop(); else scannerControls=controls;
+    } catch(err){if(generation===scanGeneration && box.isConnected){stopScan();box.innerHTML=`<div class="err-box">${esc(t('scan_err'))}</div>`;}}
   }
 
   /* ---------- AI ---------- */
@@ -1934,13 +1996,14 @@ function openMealEditor(meal, presetType, prefill){
   if (!meal && prefill) Object.assign(M, prefill);
   let ed = null;
   const sh = openSheet({title: editing ? t('edit_meal') : t('add_meal'), onClose: () => ed && ed.destroy()});
-  sh.body.innerHTML = `<div class="chips" style="margin-top:12px" data-types></div>
+  sh.body.innerHTML = `${!editing ? `<button class="btn small" data-supplement>${esc(t('supplement'))}</button>` : ''}<div class="chips" style="margin-top:12px" data-types></div>
     <div class="grid2" style="margin-top:10px">
       <div class="seg" data-kind><button data-k="simple">${esc(t('kind_simple'))}</button><button data-k="composite">${esc(t('kind_composite'))}</button></div>
       <div class="seg" data-status><button data-s="eaten">${esc(t('eaten'))}</button><button data-s="planned">${esc(t('planned'))}</button></div>
     </div>
     <p class="hint" data-kindhint></p>
     <div data-main></div>`;
+  const supplementButton=$('[data-supplement]',sh.body); if(supplementButton) supplementButton.onclick=()=>{sh.close();openSupplement(presetType);};
   const types = [...st.mealTypes.map(m => m.id)];
   if (!types.includes(M.meal_type)) types.push(M.meal_type);
   const drawHead = () => {
@@ -1979,7 +2042,9 @@ function openMealEditor(meal, presetType, prefill){
         <button class="btn grow" data-addc>${IC.plus} ${esc(t('add_component'))}</button>
         ${templates.length ? `<button class="btn grow" data-tpl>${esc(t('from_template'))}</button>` : ''}
       </div>
+      <button class="btn small" style="margin-top:12px" data-scale>${esc(t('portion_apply'))}</button>
       <div class="calc"><b class="num">${esc(fmt(T.kcal||0,0))} kcal</b> · ${esc(t('n_carbs'))} ${esc(fmt(T.carbs||0))} g · ${esc(t('n_protein'))} ${esc(fmt(T.protein||0))} g · ${esc(t('n_fat'))} ${esc(fmt(T.fat||0))} g</div>`;
+    $('[data-scale]',main).onclick=()=>openPortionScale(items=>{M.items=items;drawMain();},M.items);
     $('[data-mn]', main).oninput = e => M.name = e.target.value;
     const L = $('[data-items]', main);
     if (M.items.length) L.innerHTML = M.items.map((it, i) => `<div class="list-item"><div class="grow" style="min-width:0;cursor:pointer" data-ei="${i}"><div class="t ellipsis">${esc(it.name)}</div><div class="s">${esc(itemAmountText(it))} · ${esc(fmt(itemTotals(it).kcal||0,0))} kcal</div></div>
@@ -1989,7 +2054,7 @@ function openMealEditor(meal, presetType, prefill){
     $('[data-addc]', main).onclick = () => openComponentEditor(null, it => { M.items.push(it); drawMain(); }, items => { M.items.push(...items); drawMain(); });
     const tb = $('[data-tpl]', main);
     tb && (tb.onclick = () => pickTemplate(tpl => {
-      M.items.push(...clone(tpl.items).map(i => ({...i, id: uid()})));
+      M.items.push(...scaleItems(tpl.items,recipeMeta(tpl).servings,1));
       if (!M.name) M.name = tpl.name;
       drawMain();
     }));
@@ -2127,29 +2192,127 @@ function openFoodEditor(food){
   };
 }
 function openTemplateSheet(tpl){
-  const editable = canEditFood(tpl), isOwner = tpl.owner === S.me.id;
-  const T = mealTotals(tpl);
-  const sh = openSheet({title: tpl.name});
-  sh.body.innerHTML = `${editable ? `<label class="f"><span>${esc(t('meal_name'))}</span><input class="inp" data-n value="${esc(tpl.name)}"></label>` : ''}
-    <div class="fieldset-h">${esc(t('components'))}</div>
-    ${(tpl.items||[]).map(it => `<div class="nrow"><div>${esc(it.name)} <span class="muted small">${esc(itemAmountText(it))}</span></div><div class="num">${esc(fmt(itemTotals(it).kcal||0,0))} kcal</div></div>`).join('')}
-    <div class="calc"><b class="num">${esc(fmt(T.kcal||0,0))} kcal</b> · ${esc(t('n_carbs'))} ${esc(fmt(T.carbs||0))} g · ${esc(t('n_protein'))} ${esc(fmt(T.protein||0))} g · ${esc(t('n_fat'))} ${esc(fmt(T.fat||0))} g</div>
-    ${isOwner ? `<div class="toggle-row" style="margin-top:10px"><span>${esc(t('share_all'))}</span><input type="checkbox" class="sw-t" data-sh ${tpl.shared?'checked':''}></div>` : ''}
-    <p class="hint">${esc(t('tpl_edit_hint'))}</p>`;
-  sh.foot.innerHTML = `${editable ? `<button class="btn danger" data-del>${esc(t('delete'))}</button><button class="btn" data-save>${esc(t('save'))}</button>` : ''}<button class="btn primary" data-use>${esc(t('add_to_day'))}</button>`;
-  $('[data-use]', sh.foot).onclick = () => {
-    sh.close(); S.tab = 'day'; renderView();
-    openMealEditor(null, tpl.meal_type || guessMealType(), {kind:'composite', name: tpl.name, items: clone(tpl.items||[]).map(i => ({...i, id: uid()}))});
+  const meta=recipeMeta(tpl), sh=openSheet({title:tpl.name});
+  const totals=mealTotals(tpl);
+  sh.body.innerHTML=`<p class="hint">${esc(t('recipe_hint'))}</p><p>${esc(t('recipe_batch'))}: <b>${esc(fmt(meta.servings))}</b></p>
+    ${(tpl.items||[]).map(it=>`<div class="nrow"><span>${esc(it.name)} · ${esc(itemAmountText(it))}</span><span>${esc(fmt(itemTotals(it).kcal||0,0))} kcal</span></div>`).join('')}
+    <p><b>${esc(fmt(totals.kcal||0,0))} kcal</b></p><p style="white-space:pre-wrap">${esc(meta.instructions)}</p>
+    <label class="f"><span>${esc(t('recipe_eat'))}</span><input class="inp" data-servings inputmode="decimal" value="1"></label>`;
+  sh.foot.innerHTML=`${canEditFood(tpl)?`<button class="btn" data-edit>${esc(t('weight_edit'))}</button>`:''}<button class="btn primary" data-use>${esc(t('add_to_day'))}</button>`;
+  const edit=$('[data-edit]',sh.foot);if(edit)edit.onclick=()=>{sh.close();openRecipeEditor(tpl);};
+  $('[data-use]',sh.foot).onclick=()=>{
+    try {const items=scaleItems(tpl.items,meta.servings,$('[data-servings]',sh.body).value);sh.close();S.tab='day';renderView();openMealEditor(null,tpl.meal_type||guessMealType(),{kind:'composite',name:tpl.name,items});}
+    catch(err){toast(errMsg(err),true);}
   };
-  $('[data-save]', sh.foot) && ($('[data-save]', sh.foot).onclick = async () => {
-    const patch = {name: $('[data-n]', sh.body).value.trim() || tpl.name};
-    if (isOwner) patch.shared = $('[data-sh]', sh.body).checked;
-    try { await S.api.updateFood(tpl.id, patch); await loadFoods(); sh.close(); toast(t('saved')); renderView(); } catch(e){ toast(errMsg(e), true); }
+}
+function recipeMeta(tpl){
+  const meta=tpl && tpl.n && tpl.n._recipe || {};
+  return {servings:parseNum(meta.servings)>0?parseNum(meta.servings):1,instructions:String(meta.instructions||'')};
+}
+function scaleItems(items,batch,eaten){
+  batch=parseNum(batch);eaten=parseNum(eaten);
+  if(!(batch>0 && eaten>0 && batch<=10000 && eaten<=10000)) throw new Error(t('portion_invalid'));
+  return clone(items||[]).map(it=>{
+    const ratio=eaten/batch;it.id=uid();
+    if(it.basis==='total'){for(const key in it.n){const v=parseNum(it.n[key]);if(v!==null)it.n[key]=v*ratio;}}
+    else it.amount=(parseNum(it.amount)||0)*ratio;
+    return it;
   });
-  $('[data-del]', sh.foot) && ($('[data-del]', sh.foot).onclick = async () => {
-    if (!await askConfirm(t('confirm_delete_food', {name: tpl.name}), t('delete'), true)) return;
-    try { await S.api.deleteFood(tpl.id); await loadFoods(); sh.close(); toast(t('deleted')); renderView(); } catch(e){ toast(errMsg(e), true); }
-  });
+}
+function openPortionScale(done,items){
+  const sh=openSheet({title:t('portion_apply')});
+  sh.body.innerHTML=`<p class="hint">${esc(t('portion_hint'))}</p><label class="f"><span>${esc(t('recipe_batch'))}</span><input class="inp" data-batch inputmode="decimal" value="1"></label><label class="f"><span>${esc(t('recipe_eat'))}</span><input class="inp" data-eaten inputmode="decimal" value="1"></label>`;
+  sh.foot.innerHTML=`<button class="btn primary" data-ok>${esc(t('portion_apply'))}</button>`;
+  $('[data-ok]',sh.foot).onclick=()=>{try{const result=scaleItems(items,$('[data-batch]',sh.body).value,$('[data-eaten]',sh.body).value);done(result);sh.close();}catch(err){toast(errMsg(err),true);}};
+}
+function openRecipeEditor(tpl,prefill){
+  const draft=tpl?clone(tpl):{name:'',items:[],shared:false,meal_type:guessMealType(),...prefill};
+  const meta=recipeMeta(tpl),sh=openSheet({title:tpl?tpl.name:t('recipe_new')});
+  const draw=()=>{
+    sh.body.innerHTML=`<label class="f"><span>${esc(t('meal_name'))}</span><input class="inp" data-name value="${esc(draft.name)}"></label><label class="f"><span>${esc(t('recipe_batch'))}</span><input class="inp" inputmode="decimal" data-batch value="${esc(meta.servings)}"></label><p class="hint">${esc(t('recipe_hint'))}</p>
+    ${draft.items.map((it,i)=>`<div class="row"><button class="list-item grow" data-item="${i}">${esc(it.name)} · ${esc(itemAmountText(it))}</button><button class="btn small" data-remove-item="${i}" aria-label="${esc(t('delete'))} ${esc(it.name)}">${IC.close}</button></div>`).join('')}<button class="btn small" data-add>${esc(t('add_component'))}</button>
+    <label class="f"><span>${esc(t('recipe_steps'))}</span><textarea class="inp" rows="5" data-steps>${esc(meta.instructions)}</textarea></label>
+    ${!tpl||tpl.owner===S.me.id?`<label class="toggle-row"><span>${esc(t('share_all'))}</span><input type="checkbox" data-shared ${draft.shared?'checked':''}></label>`:''}`;
+    $('[data-name]',sh.body).oninput=e=>draft.name=e.target.value;
+    $('[data-batch]',sh.body).oninput=e=>meta.servings=e.target.value;
+    $('[data-steps]',sh.body).oninput=e=>meta.instructions=e.target.value;
+    const share=$('[data-shared]',sh.body);if(share)share.onchange=e=>draft.shared=e.target.checked;
+    $('[data-add]',sh.body).onclick=()=>openComponentEditor(null,it=>{draft.items.push(it);draw();},items=>{draft.items.push(...items);draw();});
+    $$('[data-remove-item]',sh.body).forEach(b=>b.onclick=()=>{draft.items.splice(Number(b.dataset.removeItem),1);draw();});
+    $$('[data-item]',sh.body).forEach(b=>b.onclick=()=>openComponentEditor(draft.items[Number(b.dataset.item)],it=>{draft.items[Number(b.dataset.item)]=it;draw();}));
+  };draw();
+  sh.foot.innerHTML=`${tpl?`<button class="btn danger" data-delete>${esc(t('delete'))}</button>`:''}<button class="btn primary" data-save>${esc(t('save'))}</button>`;
+  const del=$('[data-delete]',sh.foot);if(del)del.onclick=async()=>{if(!await askConfirm(t('confirm_delete_food',{name:tpl.name}),t('delete'),true))return;try{await S.api.deleteFood(tpl.id);await loadFoods();sh.close();renderView();}catch(err){toast(errMsg(err),true);}};
+  $('[data-save]',sh.foot).onclick=async e=>{
+    const btn=e.currentTarget;if(btn.disabled)return;
+    if(!draft.name.trim()){toast(t('v_name'),true);return;}
+    if(!draft.items.length){toast(t('v_components'),true);return;}
+    if(!(parseNum(meta.servings)>0 && parseNum(meta.servings)<=10000)){toast(t('portion_invalid'),true);return;}
+    btn.disabled=true;
+    try{const row={kind:'template',name:draft.name.trim(),items:draft.items.map(stripItem),meal_type:draft.meal_type,basis:'100g',n:{_recipe:{servings:parseNum(meta.servings),instructions:meta.instructions}},shared:!!draft.shared,source:'manual'};if(tpl)await S.api.updateFood(tpl.id,row);else await S.api.insertFood(row);await loadFoods();sh.close();renderView();toast(t('template_saved'));}catch(err){btn.disabled=false;toast(errMsg(err),true);}
+  };
+}
+function openSupplement(presetType){
+  const keys=allNutrientKeys().filter(k=>!['kcal','carbs','protein','fat','sugar','fiber','salt'].includes(k));
+  const sh=openSheet({title:t('supplement')});
+  sh.body.innerHTML=`<p class="hint">${esc(t('supplement_hint'))}</p><label class="f"><span>${esc(t('product_name'))}</span><input class="inp" data-name></label><select class="inp" data-nutrient>${keys.map(k=>`<option value="${esc(k)}" ${k==='mg'?'selected':''}>${esc(nName(k))} (${esc(nUnit(k))})</option>`).join('')}</select><label class="f"><span>${esc(t('supplement_amount'))} <b data-unit>mg</b></span><input class="inp" inputmode="decimal" data-dose></label><div class="fieldset-h">${esc(t('supplement_timing'))}</div>${S.settings.mealTypes.map(m=>`<label class="toggle-row"><span>${esc(mealTypeName(m.id))}</span><input type="checkbox" data-time="${esc(m.id)}" ${m.id===(presetType||guessMealType())?'checked':''}></label>`).join('')}`;
+  $('[data-nutrient]',sh.body).onchange=e=>$('[data-unit]',sh.body).textContent=nUnit(e.target.value);
+  sh.foot.innerHTML=`<button class="btn primary" data-save>${esc(t('add'))}</button>`;
+  $('[data-save]',sh.foot).onclick=async e=>{
+    const dose=parseNum($('[data-dose]',sh.body).value),key=$('[data-nutrient]',sh.body).value,times=$$('[data-time]',sh.body).filter(x=>x.checked).map(x=>x.dataset.time);
+    if(!(dose>0)||!times.length){toast(t('v_amount'),true);return;}
+    const btn=e.currentTarget;if(btn.disabled)return;btn.disabled=true;
+    const name=$('[data-name]',sh.body).value.trim()||nName(key);
+    try{await S.api.insertMeals(times.map(meal_type=>({day:S.day,meal_type,kind:'simple',name:null,status:S.day>todayIso()?'planned':'eaten',items:[{id:uid(),name,basis:'piece',amount:1,unit:'pc',piece_g:null,n:{[key]:dose},source:'manual'}],position:0})));if(!S.settings.tracked.includes(key)){S.settings.tracked.push(key);saveSettings();}sh.close();await refresh();toast(t('added'));}catch(err){btn.disabled=false;toast(errMsg(err),true);}
+  };
+}
+
+const SHOP={shared:false,q:'',version:0};
+const SHOP_CATEGORIES=['produce','chilled','pantry','other'];
+async function renderShopping(){
+  const v=$('#view'),version=++SHOP.version,shared=SHOP.shared;
+  v.innerHTML=`<div class="seg" style="margin-top:12px"><button data-scope="private" class="${shared?'':'on'}">${esc(t('shopping_private'))}</button><button data-scope="shared" class="${shared?'on':''}">${esc(t('shopping_shared'))}</button></div><p class="hint">${esc(t('shopping_hint'))}</p>
+    <form class="card" data-shop-form><label class="f"><span>${esc(t('shopping_name'))}</span><input class="inp" name="product" required maxlength="200"></label><label class="f"><span>${esc(t('shopping_quantity'))}</span><input class="inp" name="quantity" maxlength="100"></label><label class="f"><span>${esc(t('shopping_category'))}</span><select class="inp" name="category">${SHOP_CATEGORIES.map(c=>`<option value="${c}">${esc(t('shop_'+c))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('add'))}</button><div role="alert" data-shop-error></div></form>
+    <div class="row"><input class="inp grow" data-shop-q placeholder="${esc(t('shopping_search'))}" value="${esc(SHOP.q)}"><button class="btn small" data-shop-refresh>${esc(t('shopping_refresh'))}</button></div><div data-shop-list class="card"><div class="spinner"></div></div>`;
+  $$('[data-scope]',v).forEach(b=>b.onclick=()=>{SHOP.shared=b.dataset.scope==='shared';renderShopping();});
+  $('[data-shop-refresh]',v).onclick=()=>renderShopping();
+  $('[data-shop-form]',v).onsubmit=async e=>{
+    e.preventDefault();const f=e.target,btn=$('button[type=submit]',f);if(btn.disabled)return;
+    const name=f.elements.product.value.trim();if(!name)return;btn.disabled=true;
+    try{await S.api.addShopping({name,quantity:f.elements.quantity.value.trim(),category:f.elements.category.value,shared});if(S.tab==='shop'&&version===SHOP.version)renderShopping();}
+    catch(err){$('[data-shop-error]',f).textContent=errMsg(err);btn.disabled=false;}
+  };
+  let rows=[];
+  const draw=()=>{
+    if(S.tab!=='shop'||version!==SHOP.version)return;
+    const list=$('[data-shop-list]',v),q=SHOP.q.trim().toLocaleLowerCase();
+    const filtered=rows.filter(x=>(x.name+' '+x.quantity).toLocaleLowerCase().includes(q));
+    list.innerHTML=filtered.length?SHOP_CATEGORIES.map(c=>{
+      const items=filtered.filter(x=>x.category===c).sort((a,b)=>Number(a.checked)-Number(b.checked));if(!items.length)return '';
+      return `<div class="fieldset-h">${esc(t('shop_'+c))}</div>`+items.map(x=>`<div class="list-item"><label class="row grow" style="cursor:pointer"><input type="checkbox" data-shop-check="${esc(x.id)}" ${x.checked?'checked':''}><span style="${x.checked?'color:var(--muted);text-decoration:line-through;':''}">${esc(x.name)} <span class="small">${esc(x.quantity||'')}</span></span></label>${x.owner===S.me.id?`<button class="btn small danger" data-shop-delete="${esc(x.id)}" aria-label="${esc(t('delete'))} ${esc(x.name)}">${IC.close}</button>`:''}</div>`).join('');
+    }).join(''):`<p class="muted">${esc(t('shopping_empty'))}</p>`;
+    $$('[data-shop-check]',list).forEach(cb=>cb.onchange=async()=>{const checked=cb.checked;cb.disabled=true;try{await S.api.checkShopping(cb.dataset.shopCheck,checked);const row=rows.find(x=>x.id===cb.dataset.shopCheck);if(row)row.checked=checked;draw();}catch(err){cb.checked=!checked;cb.disabled=false;toast(errMsg(err),true);}});
+    $$('[data-shop-delete]',list).forEach(b=>b.onclick=async()=>{if(!await askConfirm(t('delete')+'?',t('delete'),true))return;b.disabled=true;try{await S.api.deleteShopping(b.dataset.shopDelete);rows=rows.filter(x=>x.id!==b.dataset.shopDelete);draw();}catch(err){b.disabled=false;toast(errMsg(err),true);}});
+  };
+  $('[data-shop-q]',v).oninput=e=>{SHOP.q=e.target.value;draw();};
+  try{rows=await S.api.listShopping(shared);draw();}
+  catch(err){if(S.tab==='shop'&&version===SHOP.version)$('[data-shop-list]',v).textContent=errMsg(err);}
+}
+
+const UL_SOURCE='https://www.efsa.europa.eu/sites/default/files/2024-05/ul-summary-report.pdf';
+const ADULT_UL={vitD:100,vitB6:12,se:255,zn:25};
+function upperLimitStatus(meals,key){
+  const items=meals.filter(m=>m.status==='eaten').flatMap(m=>m.items||[]);
+  const known=items.filter(it=>parseNum((it.n||{})[key])!==null && itemFactor(it)>0);
+  const sum=known.reduce((total,it)=>total+(itemTotals(it)[key]||0),0);
+  const complete=items.length>0 && known.length===items.length;
+  return {sum,status:sum>ADULT_UL[key]?'over':complete?'below':'unknown'};
+}
+function upperLimitCard(meals){
+  return `<section class="card"><div class="fieldset-h">${esc(t('ul_title'))}</div><p class="hint">${esc(t('ul_note'))}</p>${Object.keys(ADULT_UL).map(k=>{
+    const r=upperLimitStatus(meals,k),color=r.status==='over'?'var(--over)':r.status==='below'?'var(--ok)':'var(--muted)';
+    return `<div style="padding:10px 0;border-bottom:1px solid var(--line)"><b>${esc(nName(k))}</b> · ${esc(fmt(r.sum,2))} / ${ADULT_UL[k]} ${esc(nUnit(k))}<div class="small" style="color:${color}">${esc(t('ul_'+r.status))}</div></div>`;
+  }).join('')}<p><a href="${UL_SOURCE}" target="_blank" rel="noopener noreferrer">${esc(t('ul_source'))}</a></p></section>`;
 }
 
 /* Weight is stored in the existing protected profile settings and JSON export. */
@@ -2259,6 +2422,7 @@ function renderSettings(){
     <p class="small muted">${esc(S.me.email || '')}${S.isAdmin ? ' · <b>'+esc(t('admin'))+'</b>' : ''}</p>
     <div class="row wrap"><button class="btn small" data-pw>${esc(t('change_pw'))}</button><button class="btn small" data-out>${esc(t('sign_out'))}</button></div></div>`;
   h += weightCard(st, false);
+  h += `<div class="card"><div class="fieldset-h">${esc(t('ul_title'))}</div><label class="toggle-row"><span>${esc(t('ul_enable'))}</span><input type="checkbox" data-ul ${st.upperWarnings?'checked':''}></label><p class="hint">${esc(t('ul_note'))}</p><a href="${UL_SOURCE}" target="_blank" rel="noopener noreferrer">${esc(t('ul_source'))}</a></div>`;
   // Język i wygląd
   h += `<div class="card"><div class="fieldset-h" style="margin-top:0">${esc(t('language'))}</div>
     <div class="seg">${['pl','de','en'].map(l => `<button data-lang="${l}" class="${S.lang===l?'on':''}">${esc(t('lang_'+l))}</button>`).join('')}</div>
@@ -2320,6 +2484,7 @@ function renderSettings(){
   v.innerHTML = h;
 
   bindWeightCard(v, st, false);
+  $('[data-ul]',v).onchange=e=>{st.upperWarnings=e.target.checked;saveSettings();};
   // --- zdarzenia
   $('[data-dn]', v).onchange = async e => {
     try { S.profile = await S.api.updateProfile(S.me.id, {display_name: e.target.value.trim()}); toast(t('saved')); } catch(err){ toast(errMsg(err), true); }
@@ -2420,7 +2585,8 @@ async function exportJson(){
   try {
     const meals = await S.api.allMeals(S.me.id);
     const foods = S.foods.filter(f => f.owner === S.me.id);
-    download(`licznik-kcal_${todayIso()}.json`, JSON.stringify({exported_at: new Date().toISOString(), email: S.me.email, settings: S.settings, foods, meals}, null, 2), 'application/json');
+    const shopping = {private:await S.api.listShopping(false),family:await S.api.listShopping(true)};
+    download(`licznik-kcal_${todayIso()}.json`, JSON.stringify({exported_at: new Date().toISOString(), email: S.me.email, settings: S.settings, foods, meals, shopping}, null, 2), 'application/json');
   } catch(err){ toast(errMsg(err), true); }
 }
 async function exportCsv(){
