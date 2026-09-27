@@ -229,6 +229,7 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background
 "use strict";
 const I18N = {
 pl: {
+  weight_average:"Średnia z ostatnich 7 dni", weight_week_change:"W porównaniu z poprzednimi 7 dniami", weight_samples:"Liczba pomiarów", weight_week_hint:"Średnia obejmuje zapisane pomiary od dziś do 6 dni wstecz. Porównanie pojawia się przy co najmniej dwóch pomiarach w każdym okresie.", weight_csv:"Eksport wagi (CSV)",
   weight:"Waga", weight_latest:"Ostatni pomiar", weight_goal:"Waga docelowa", weight_add:"Zapisz pomiar", weight_history:"Historia wagi", weight_change:"Zmiana od pierwszego pomiaru", weight_remaining:"Różnica do celu", weight_empty:"Nie zapisano jeszcze pomiarów.", weight_date:"Data pomiaru", weight_kg:"Waga (kg)", weight_invalid:"Podaj prawidłową datę (nie w przyszłości) i wagę większą od 0, maksymalnie 1000 kg.", weight_replace:"Pomiar dla tej daty zostanie zastąpiony.", weight_delete:"Usuń ten pomiar?", weight_goal_hint:"Cel jest opcjonalny. Puste pole usuwa cel.", weight_save_goal:"Zapisz cel", weight_goal_placeholder:"Wpisz wagę docelową", weight_privacy:"Administrator aplikacji może odczytać te dane.", weight_first:"Pierwszy pomiar", weight_no_goal:"Nie ustawiono celu", weight_edit:"Edytuj",
   mail_unavailable:'Resetowanie hasła przez e-mail nie jest jeszcze dostępne. Skontaktuj się z administratorem aplikacji.',
   app_name:'Licznik kilokalorii', day_plan:'Plan dnia', tab_day:'Dzień', tab_lib:'Biblioteka', tab_set:'Ustawienia',
@@ -306,6 +307,7 @@ pl: {
   n_ca:'Wapń', n_fe:'Żelazo', n_mg:'Magnez', n_k:'Potas', n_zn:'Cynk', n_iodine:'Jod', n_se:'Selen', n_caffeine:'Kofeina', n_alcohol:'Alkohol', n_water:'Woda'
 },
 de: {
+  weight_average:"Durchschnitt der letzten 7 Tage", weight_week_change:"Vergleich mit den vorherigen 7 Tagen", weight_samples:"Anzahl der Messungen", weight_week_hint:"Der Durchschnitt umfasst vorhandene Messungen von heute bis vor 6 Tagen. Der Vergleich erscheint ab zwei Messungen je Zeitraum.", weight_csv:"Gewicht exportieren (CSV)",
   weight:"Gewicht", weight_latest:"Letzte Messung", weight_goal:"Wunschgewicht", weight_add:"Gewicht eintragen", weight_history:"Gewichtsverlauf", weight_change:"Veränderung seit erster Messung", weight_remaining:"Abstand zum Wunschgewicht", weight_empty:"Noch keine Messung gespeichert.", weight_date:"Datum der Messung", weight_kg:"Gewicht (kg)", weight_invalid:"Gib ein gültiges Datum (nicht in der Zukunft) und ein Gewicht über 0 bis höchstens 1000 kg ein.", weight_replace:"Ein vorhandener Messwert für dieses Datum wird ersetzt.", weight_delete:"Diese Messung löschen?", weight_goal_hint:"Das Ziel ist optional. Ein leeres Feld entfernt das Ziel.", weight_save_goal:"Ziel speichern", weight_goal_placeholder:"Wunschgewicht eingeben", weight_privacy:"Der Administrator der App kann diese Daten lesen.", weight_first:"Erste Messung", weight_no_goal:"Kein Wunschgewicht festgelegt", weight_edit:"Bearbeiten",
   mail_unavailable:'Das Zurücksetzen per E-Mail ist noch nicht eingerichtet. Wende dich an den Administrator der App.',
   app_name:'Kalorienzähler', day_plan:'Tagesplan', tab_day:'Tag', tab_lib:'Bibliothek', tab_set:'Einstellungen',
@@ -383,6 +385,7 @@ de: {
   n_ca:'Calcium', n_fe:'Eisen', n_mg:'Magnesium', n_k:'Kalium', n_zn:'Zink', n_iodine:'Jod', n_se:'Selen', n_caffeine:'Koffein', n_alcohol:'Alkohol', n_water:'Wasser'
 },
 en: {
+  weight_average:"Average over the last 7 days", weight_week_change:"Compared with the previous 7 days", weight_samples:"Number of measurements", weight_week_hint:"The average uses recorded measurements from today back through 6 days ago. Comparison requires at least two measurements in each period.", weight_csv:"Export weight (CSV)",
   weight:"Weight", weight_latest:"Latest measurement", weight_goal:"Goal weight", weight_add:"Log weight", weight_history:"Weight history", weight_change:"Change since first measurement", weight_remaining:"Distance to goal", weight_empty:"No measurements saved yet.", weight_date:"Measurement date", weight_kg:"Weight (kg)", weight_invalid:"Enter a valid date (not in the future) and a weight above 0 and no more than 1000 kg.", weight_replace:"An existing measurement for this date will be replaced.", weight_delete:"Delete this measurement?", weight_goal_hint:"The goal is optional. Leave blank to remove it.", weight_save_goal:"Save goal", weight_goal_placeholder:"Enter goal weight", weight_privacy:"The app administrator can read this data.", weight_first:"First measurement", weight_no_goal:"No goal weight set", weight_edit:"Edit",
   mail_unavailable:'Email password reset is not set up yet. Contact the app administrator.',
   app_name:'Calorie counter', day_plan:'Day plan', tab_day:'Day', tab_lib:'Library', tab_set:'Settings',
@@ -567,6 +570,21 @@ function weightStats(value){
   const w = normalizeWeight(value), first = w.entries[0], latest = w.entries[w.entries.length-1];
   return {...w, first, latest, change:latest && first ? +(latest.kg-first.kg).toFixed(2) : null,
     remaining:latest && w.goal !== null ? +Math.abs(latest.kg-w.goal).toFixed(2) : null};
+}
+function weightWeek(value, end = todayIso()){
+  const entries = normalizeWeight(value).entries;
+  const start = addDays(end,-6), previousStart = addDays(end,-13);
+  const current = entries.filter(e=>e.day >= start && e.day <= end);
+  const previous = entries.filter(e=>e.day >= previousStart && e.day < start);
+  const mean = rows => rows.length ? rows.reduce((sum,e)=>sum+e.kg,0)/rows.length : null;
+  const average = mean(current), previousAverage = mean(previous);
+  return {average:average === null ? null : +average.toFixed(2), count:current.length, previousCount:previous.length,
+    change:current.length >= 2 && previous.length >= 2 ? +(average-previousAverage).toFixed(2) : null};
+}
+function weightCsv(value, lang){
+  const separator = lang === 'en' ? ',' : ';';
+  const rows = normalizeWeight(value).entries.map(e => [e.day, lang === 'en' ? String(e.kg) : String(e.kg).replace('.',',')].join(separator));
+  return '\uFEFF' + ['date'+separator+'weight_kg',...rows].join('\r\n');
 }
 function upsertWeight(value, day, kg){
   if (!validWeightDay(day) || validWeight(kg) === null) throw new Error(t('weight_invalid'));
@@ -2136,7 +2154,7 @@ function openTemplateSheet(tpl){
 
 /* Weight is stored in the existing protected profile settings and JSON export. */
 function weightCard(st, readonly){
-  const w = weightStats(st.weight);
+  const w = weightStats(st.weight), week = weightWeek(st.weight);
   const signed = n => (n > 0 ? '+' : '') + fmt(n,2);
   return `<section class="card" aria-label="${esc(t('weight'))}">
     <div class="fieldset-h" style="margin-top:0">${esc(t('weight'))}</div>
@@ -2146,6 +2164,8 @@ function weightCard(st, readonly){
       <div><span class="small muted">${esc(t('weight_goal'))}</span><div style="font-size:26px;font-weight:700">${w.goal !== null ? esc(fmt(w.goal,2))+' kg' : '—'}</div></div></div>
     ${w.entries.length > 1 ? `<p class="small">${esc(t('weight_change'))}: <b>${esc(signed(w.change))} kg</b></p>` : ''}
     ${w.remaining !== null ? `<p class="small">${esc(t('weight_remaining'))}: <b>${esc(fmt(w.remaining,2))} kg</b></p>` : ''}
+    ${week.average !== null ? `<p class="small">${esc(t('weight_average'))}: <b>${esc(fmt(week.average,2))} kg</b> <span class="muted">(${esc(t('weight_samples'))}: ${week.count})</span></p>` : ''}
+    ${week.change !== null ? `<p class="small">${esc(t('weight_week_change'))}: <b>${esc(signed(week.change))} kg</b></p>` : ''}
     <div class="row wrap" style="margin-top:14px">${!readonly ? `<button class="btn small primary" data-weight-add>${esc(t('weight_add'))}</button>` : ''}<button class="btn small" data-weight-history>${esc(t('weight_history'))}</button></div>
   </section>`;
 }
@@ -2201,9 +2221,11 @@ function openWeightHistory(st, readonly){
   const draw = () => {
     const w = normalizeWeight((readonly ? st : S.settings).weight);
     sh.body.innerHTML = `${!readonly ? `<form data-weight-goal><label class="f"><span>${esc(t('weight_goal'))} (kg)</span><input class="inp" name="goal" inputmode="decimal" value="${esc(inputNum(w.goal))}" placeholder="${esc(t('weight_goal_placeholder'))}"></label><p class="hint">${esc(t('weight_goal_hint'))}</p><button class="btn small" type="submit">${esc(t('weight_save_goal'))}</button><div data-goal-error role="alert"></div></form><hr style="border:0;border-top:1px solid var(--line);margin:20px 0">` : ''}
-      ${weightChart(w.entries)}<div style="max-height:340px;overflow:auto">${w.entries.length ? [...w.entries].reverse().map(e => `<div class="list-item"><div class="grow"><b>${esc(fmt(e.kg,2))} kg</b><div class="small muted">${esc(fmtDate(e.day))}</div></div>${readonly ? '' : `<button class="btn small" data-weight-edit="${e.day}">${esc(t('weight_edit'))}</button><button class="btn small danger" data-weight-delete="${e.day}" aria-label="${esc(t('delete'))} ${e.day}">${esc(t('delete'))}</button>`}</div>`).join('') : `<p class="muted">${esc(t('weight_empty'))}</p>`}</div>
+      ${weightChart(w.entries)}<p class="hint">${esc(t('weight_week_hint'))}</p>${!readonly && w.entries.length ? `<button class="btn small" data-weight-csv style="margin-bottom:12px">${esc(t('weight_csv'))}</button>` : ''}<div style="max-height:340px;overflow:auto">${w.entries.length ? [...w.entries].reverse().map(e => `<div class="list-item"><div class="grow"><b>${esc(fmt(e.kg,2))} kg</b><div class="small muted">${esc(fmtDate(e.day))}</div></div>${readonly ? '' : `<button class="btn small" data-weight-edit="${e.day}">${esc(t('weight_edit'))}</button><button class="btn small danger" data-weight-delete="${e.day}" aria-label="${esc(t('delete'))} ${e.day}">${esc(t('delete'))}</button>`}</div>`).join('') : `<p class="muted">${esc(t('weight_empty'))}</p>`}</div>
       <p class="hint">${esc(t('weight_privacy'))}</p>`;
     if (readonly) return;
+    const exportButton = $('[data-weight-csv]',sh.body);
+    if (exportButton) exportButton.onclick = () => download(`weight_${todayIso()}.csv`,weightCsv(S.settings.weight,S.lang),'text/csv;charset=utf-8');
     $('[data-weight-goal]',sh.body).onsubmit = async e => {
       e.preventDefault(); const f=e.target, btn=$('button',f); if (btn.disabled) return;
       const raw=f.elements.goal.value.trim(), goal=validWeight(raw);
