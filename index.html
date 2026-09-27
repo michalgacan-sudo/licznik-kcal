@@ -229,6 +229,7 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background
 "use strict";
 const I18N = {
 pl: {
+  mail_unavailable:'Resetowanie hasła przez e-mail nie jest jeszcze dostępne. Skontaktuj się z administratorem aplikacji.',
   app_name:'Licznik kilokalorii', day_plan:'Plan dnia', tab_day:'Dzień', tab_lib:'Biblioteka', tab_set:'Ustawienia',
   login_sub:'Zaloguj się, aby zapisywać posiłki.', email:'E-mail', password:'Hasło', sign_in:'Zaloguj', sign_out:'Wyloguj',
   forgot:'Nie pamiętam hasła', forgot_need_email:'Wpisz najpierw swój adres e-mail.', forgot_sent:'Jeśli konto istnieje, wysłaliśmy link do zmiany hasła.',
@@ -304,6 +305,7 @@ pl: {
   n_ca:'Wapń', n_fe:'Żelazo', n_mg:'Magnez', n_k:'Potas', n_zn:'Cynk', n_iodine:'Jod', n_se:'Selen', n_caffeine:'Kofeina', n_alcohol:'Alkohol', n_water:'Woda'
 },
 de: {
+  mail_unavailable:'Das Zurücksetzen per E-Mail ist noch nicht eingerichtet. Wende dich an den Administrator der App.',
   app_name:'Kalorienzähler', day_plan:'Tagesplan', tab_day:'Tag', tab_lib:'Bibliothek', tab_set:'Einstellungen',
   login_sub:'Melde dich an, um Mahlzeiten zu speichern.', email:'E-Mail', password:'Passwort', sign_in:'Anmelden', sign_out:'Abmelden',
   forgot:'Passwort vergessen', forgot_need_email:'Gib zuerst deine E-Mail-Adresse ein.', forgot_sent:'Falls das Konto existiert, wurde ein Link zum Zurücksetzen gesendet.',
@@ -379,6 +381,7 @@ de: {
   n_ca:'Calcium', n_fe:'Eisen', n_mg:'Magnesium', n_k:'Kalium', n_zn:'Zink', n_iodine:'Jod', n_se:'Selen', n_caffeine:'Koffein', n_alcohol:'Alkohol', n_water:'Wasser'
 },
 en: {
+  mail_unavailable:'Email password reset is not set up yet. Contact the app administrator.',
   app_name:'Calorie counter', day_plan:'Day plan', tab_day:'Day', tab_lib:'Library', tab_set:'Settings',
   login_sub:'Sign in to save your meals.', email:'Email', password:'Password', sign_in:'Sign in', sign_out:'Sign out',
   forgot:'Forgot password', forgot_need_email:'Enter your email address first.', forgot_sent:'If the account exists, a reset link has been sent.',
@@ -771,12 +774,12 @@ class SupabaseApi {
   async updatePassword(pw){ const {error} = await this.sb.auth.updateUser({password: pw}); if (error) throw error; }
   async getProfile(id){ return this._t(this.sb.from('profiles').select('*').eq('id', id).maybeSingle()); }
   async updateProfile(id, patch){ return this._t(this.sb.from('profiles').update(patch).eq('id', id).select().single()); }
-  async listProfiles(){ return this._t(this.sb.from('profiles').select('id,email,display_name,is_admin,settings').order('display_name')); }
+  async listProfiles(){ return this._all(() => this.sb.from('profiles').select('id,email,display_name,is_admin,settings').order('display_name').order('id')); }
   async listMeals(userId, from, to){
-    return this._t(this.sb.from('meals').select('*').eq('user_id', userId).gte('day', from).lte('day', to).order('position').order('created_at'));
+    return this._all(() => this.sb.from('meals').select('*').eq('user_id', userId).gte('day', from).lte('day', to).order('position').order('created_at').order('id'));
   }
   async monthMarks(userId, from, to){
-    return this._t(this.sb.from('meals').select('day,status').eq('user_id', userId).gte('day', from).lte('day', to));
+    return this._all(() => this.sb.from('meals').select('day,status').eq('user_id', userId).gte('day', from).lte('day', to).order('day').order('id'));
   }
   async insertMeal(m){ return this._t(this.sb.from('meals').insert(m).select().single()); }
   async insertMeals(ms){ return this._t(this.sb.from('meals').insert(ms).select()); }
@@ -1090,11 +1093,8 @@ function renderLogin(msg){
       btn.disabled = false;
     }
   };
-  $('#forgot').onclick = async () => {
-    const email = $('#loginf').email.value.trim();
-    if (!email){ $('#loginerr').innerHTML = `<div class="err-box">${esc(t('forgot_need_email'))}</div>`; return; }
-    try { await S.api.resetPassword(email); renderLogin(t('forgot_sent')); }
-    catch(err){ $('#loginerr').innerHTML = `<div class="err-box">${esc(errMsg(err))}</div>`; }
+  $('#forgot').onclick = () => {
+    $('#loginerr').innerHTML = `<div class="info-box">${esc(t('mail_unavailable'))}</div>`;
   };
 }
 function renderSetPassword(){
@@ -1402,7 +1402,9 @@ function bindMealCard(el){
 function openCalendar(){
   let cur = parseDay(S.day); cur.setDate(1);
   const sh = openSheet({title: t('choose_day'), footer:false});
+  let drawVersion = 0;
   const draw = async () => {
+    const version = ++drawVersion;
     const y = cur.getFullYear(), mo = cur.getMonth();
     const first = new Date(y, mo, 1), days = new Date(y, mo+1, 0).getDate();
     const from = isoDay(first), to = isoDay(new Date(y, mo, days));
@@ -1431,7 +1433,7 @@ function openCalendar(){
       const rows = await S.api.monthMarks(S.viewId, from, to);
       const marks = {};
       for (const r of rows){ marks[r.day] = marks[r.day] || {}; marks[r.day][r.status === 'planned' ? 'p' : 'e'] = true; }
-      if (sh.el.isConnected) render(marks);
+      if (sh.el.isConnected && version === drawVersion) render(marks);
     } catch(e){}
   };
   draw();
