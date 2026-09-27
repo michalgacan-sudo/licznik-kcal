@@ -229,6 +229,7 @@ code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em;background
 "use strict";
 const I18N = {
 pl: {
+  weight:"Waga", weight_latest:"Ostatni pomiar", weight_goal:"Waga docelowa", weight_add:"Zapisz pomiar", weight_history:"Historia wagi", weight_change:"Zmiana od pierwszego pomiaru", weight_remaining:"Różnica do celu", weight_empty:"Nie zapisano jeszcze pomiarów.", weight_date:"Data pomiaru", weight_kg:"Waga (kg)", weight_invalid:"Podaj prawidłową datę (nie w przyszłości) i wagę większą od 0, maksymalnie 1000 kg.", weight_replace:"Pomiar dla tej daty zostanie zastąpiony.", weight_delete:"Usuń ten pomiar?", weight_goal_hint:"Cel jest opcjonalny. Puste pole usuwa cel.", weight_save_goal:"Zapisz cel", weight_goal_placeholder:"Wpisz wagę docelową", weight_privacy:"Administrator aplikacji może odczytać te dane.", weight_first:"Pierwszy pomiar", weight_no_goal:"Nie ustawiono celu", weight_edit:"Edytuj",
   mail_unavailable:'Resetowanie hasła przez e-mail nie jest jeszcze dostępne. Skontaktuj się z administratorem aplikacji.',
   app_name:'Licznik kilokalorii', day_plan:'Plan dnia', tab_day:'Dzień', tab_lib:'Biblioteka', tab_set:'Ustawienia',
   login_sub:'Zaloguj się, aby zapisywać posiłki.', email:'E-mail', password:'Hasło', sign_in:'Zaloguj', sign_out:'Wyloguj',
@@ -305,6 +306,7 @@ pl: {
   n_ca:'Wapń', n_fe:'Żelazo', n_mg:'Magnez', n_k:'Potas', n_zn:'Cynk', n_iodine:'Jod', n_se:'Selen', n_caffeine:'Kofeina', n_alcohol:'Alkohol', n_water:'Woda'
 },
 de: {
+  weight:"Gewicht", weight_latest:"Letzte Messung", weight_goal:"Wunschgewicht", weight_add:"Gewicht eintragen", weight_history:"Gewichtsverlauf", weight_change:"Veränderung seit erster Messung", weight_remaining:"Abstand zum Wunschgewicht", weight_empty:"Noch keine Messung gespeichert.", weight_date:"Datum der Messung", weight_kg:"Gewicht (kg)", weight_invalid:"Gib ein gültiges Datum (nicht in der Zukunft) und ein Gewicht über 0 bis höchstens 1000 kg ein.", weight_replace:"Ein vorhandener Messwert für dieses Datum wird ersetzt.", weight_delete:"Diese Messung löschen?", weight_goal_hint:"Das Ziel ist optional. Ein leeres Feld entfernt das Ziel.", weight_save_goal:"Ziel speichern", weight_goal_placeholder:"Wunschgewicht eingeben", weight_privacy:"Der Administrator der App kann diese Daten lesen.", weight_first:"Erste Messung", weight_no_goal:"Kein Wunschgewicht festgelegt", weight_edit:"Bearbeiten",
   mail_unavailable:'Das Zurücksetzen per E-Mail ist noch nicht eingerichtet. Wende dich an den Administrator der App.',
   app_name:'Kalorienzähler', day_plan:'Tagesplan', tab_day:'Tag', tab_lib:'Bibliothek', tab_set:'Einstellungen',
   login_sub:'Melde dich an, um Mahlzeiten zu speichern.', email:'E-Mail', password:'Passwort', sign_in:'Anmelden', sign_out:'Abmelden',
@@ -381,6 +383,7 @@ de: {
   n_ca:'Calcium', n_fe:'Eisen', n_mg:'Magnesium', n_k:'Kalium', n_zn:'Zink', n_iodine:'Jod', n_se:'Selen', n_caffeine:'Koffein', n_alcohol:'Alkohol', n_water:'Wasser'
 },
 en: {
+  weight:"Weight", weight_latest:"Latest measurement", weight_goal:"Goal weight", weight_add:"Log weight", weight_history:"Weight history", weight_change:"Change since first measurement", weight_remaining:"Distance to goal", weight_empty:"No measurements saved yet.", weight_date:"Measurement date", weight_kg:"Weight (kg)", weight_invalid:"Enter a valid date (not in the future) and a weight above 0 and no more than 1000 kg.", weight_replace:"An existing measurement for this date will be replaced.", weight_delete:"Delete this measurement?", weight_goal_hint:"The goal is optional. Leave blank to remove it.", weight_save_goal:"Save goal", weight_goal_placeholder:"Enter goal weight", weight_privacy:"The app administrator can read this data.", weight_first:"First measurement", weight_no_goal:"No goal weight set", weight_edit:"Edit",
   mail_unavailable:'Email password reset is not set up yet. Contact the app administrator.',
   app_name:'Calorie counter', day_plan:'Day plan', tab_day:'Day', tab_lib:'Library', tab_set:'Settings',
   login_sub:'Sign in to save your meals.', email:'Email', password:'Password', sign_in:'Sign in', sign_out:'Sign out',
@@ -524,6 +527,7 @@ function defaultSettings(){
     goals: { kcal:{mode:'max', max:2000} },
     custom: [],
     mealTypes: DEFAULT_MEAL_TYPES.map(m => ({...m})),
+    weight: {goal:null, entries:[]},
     advanced: false
   };
 }
@@ -537,8 +541,37 @@ function normSettings(s){
     goals: s.goals && typeof s.goals === 'object' ? s.goals : d.goals,
     custom: Array.isArray(s.custom) ? s.custom : d.custom,
     mealTypes: Array.isArray(s.mealTypes) && s.mealTypes.length ? s.mealTypes : d.mealTypes,
+    weight: normalizeWeight(s.weight),
     advanced: !!s.advanced
   };
+}
+
+function validWeight(value){
+  const n = parseNum(value);
+  if (n === null || n <= 0 || n > 1000) return null;
+  const rounded = Math.round(n * 100) / 100;
+  return rounded > 0 ? rounded : null;
+}
+function validWeightDay(day){
+  return typeof day === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(day) && isoDay(parseDay(day)) === day && day <= todayIso();
+}
+function normalizeWeight(value){
+  const w = value && typeof value === 'object' ? value : {};
+  const byDay = new Map();
+  for (const entry of Array.isArray(w.entries) ? w.entries : []){
+    if (entry && validWeightDay(entry.day) && validWeight(entry.kg) !== null) byDay.set(entry.day, {day:entry.day, kg:validWeight(entry.kg)});
+  }
+  return {goal:validWeight(w.goal), entries:[...byDay.values()].sort((a,b) => a.day.localeCompare(b.day))};
+}
+function weightStats(value){
+  const w = normalizeWeight(value), first = w.entries[0], latest = w.entries[w.entries.length-1];
+  return {...w, first, latest, change:latest && first ? +(latest.kg-first.kg).toFixed(2) : null,
+    remaining:latest && w.goal !== null ? +Math.abs(latest.kg-w.goal).toFixed(2) : null};
+}
+function upsertWeight(value, day, kg){
+  if (!validWeightDay(day) || validWeight(kg) === null) throw new Error(t('weight_invalid'));
+  const w = normalizeWeight(value);
+  return normalizeWeight({...w, entries:[...w.entries.filter(e => e.day !== day), {day,kg:validWeight(kg)}]});
 }
 
 /* =====================================================================
@@ -1145,10 +1178,15 @@ async function afterLogin(){
 async function loadFoods(){ S.foods = await S.api.listFoods(); }
 async function loadDay(){ S.meals = await S.api.listMeals(S.viewId, S.day, S.day); }
 let saveTimer;
+let settingsWrite = Promise.resolve();
 function saveSettings(immediate){
   clearTimeout(saveTimer);
   const run = async () => {
-    try { const p = await S.api.updateProfile(S.me.id, {settings: S.settings}); S.profile = p; }
+    try {
+      const id = S.me.id, settings = clone(S.settings);
+      settingsWrite = settingsWrite.catch(() => {}).then(() => S.api.updateProfile(id, {settings}));
+      S.profile = await settingsWrite;
+    }
     catch(err){ toast(t('err_save')+': '+errMsg(err), true); }
   };
   if (immediate) return run();
@@ -1241,7 +1279,7 @@ function renderDay(){
   const eaten = dayTotals(S.meals, 'eaten');
   const planned = dayTotals(S.meals, 'planned');
   const all = sumInto(sumInto({}, eaten), planned);
-  let html = summaryCard(eaten, planned, all, st);
+  let html = summaryCard(eaten, planned, all, st) + weightCard(st, readOnly());
   const types = st.mealTypes.map(m => m.id);
   const extraTypes = [...new Set(S.meals.map(m => m.meal_type))].filter(x => !types.includes(x));
   for (const type of [...types, ...extraTypes]){
@@ -1255,6 +1293,7 @@ function renderDay(){
   }
   v.innerHTML = html;
   bindSummary(v);
+  bindWeightCard(v, st, readOnly());
   $$('[data-add]', v).forEach(b => b.onclick = () => openMealEditor(null, b.dataset.add));
   $$('.meal', v).forEach(el => bindMealCard(el));
 }
@@ -2095,6 +2134,95 @@ function openTemplateSheet(tpl){
   });
 }
 
+/* Weight is stored in the existing protected profile settings and JSON export. */
+function weightCard(st, readonly){
+  const w = weightStats(st.weight);
+  const signed = n => (n > 0 ? '+' : '') + fmt(n,2);
+  return `<section class="card" aria-label="${esc(t('weight'))}">
+    <div class="fieldset-h" style="margin-top:0">${esc(t('weight'))}</div>
+    <div class="grid2"><div><span class="small muted">${esc(t('weight_latest'))}</span>
+      <div style="font-size:26px;font-weight:700">${w.latest ? esc(fmt(w.latest.kg,2))+' kg' : '—'}</div>
+      ${w.latest ? `<span class="small muted">${esc(fmtDate(w.latest.day))}</span>` : `<span class="small muted">${esc(t('weight_empty'))}</span>`}</div>
+      <div><span class="small muted">${esc(t('weight_goal'))}</span><div style="font-size:26px;font-weight:700">${w.goal !== null ? esc(fmt(w.goal,2))+' kg' : '—'}</div></div></div>
+    ${w.entries.length > 1 ? `<p class="small">${esc(t('weight_change'))}: <b>${esc(signed(w.change))} kg</b></p>` : ''}
+    ${w.remaining !== null ? `<p class="small">${esc(t('weight_remaining'))}: <b>${esc(fmt(w.remaining,2))} kg</b></p>` : ''}
+    <div class="row wrap" style="margin-top:14px">${!readonly ? `<button class="btn small primary" data-weight-add>${esc(t('weight_add'))}</button>` : ''}<button class="btn small" data-weight-history>${esc(t('weight_history'))}</button></div>
+  </section>`;
+}
+function bindWeightCard(root, st, readonly){
+  const add = $('[data-weight-add]', root);
+  if (add) add.onclick = () => openWeightEntry();
+  const history = $('[data-weight-history]', root);
+  if (history) history.onclick = () => openWeightHistory(st, readonly);
+}
+async function persistWeight(next){
+  clearTimeout(saveTimer);
+  const settings = {...S.settings, weight:normalizeWeight(next)};
+  const id = S.me.id;
+  settingsWrite = settingsWrite.catch(() => {}).then(() => S.api.updateProfile(id, {settings:clone(settings)}));
+  const profile = await settingsWrite;
+  S.profile = profile;
+  S.settings.weight = settings.weight;
+  if (S.viewId === S.me.id) S.viewSettings = S.settings;
+  const own = S.profiles.find(p => p.id === S.me.id);
+  if (own) own.settings = settings;
+  renderView();
+}
+function openWeightEntry(entry, onSaved){
+  const day = entry ? entry.day : (validWeightDay(S.day) ? S.day : todayIso());
+  const existing = normalizeWeight(S.settings.weight).entries.find(e => e.day === day);
+  const sh = openSheet({title:t('weight_add'), footer:false});
+  sh.body.innerHTML = `<form data-weight-form>
+    <label class="f"><span>${esc(t('weight_date'))}</span><input class="inp" type="date" name="day" required max="${todayIso()}" value="${day}" ${entry ? 'readonly' : ''}></label>
+    <label class="f"><span>${esc(t('weight_kg'))}</span><input class="inp" inputmode="decimal" name="kg" required autocomplete="off" value="${existing ? esc(inputNum(existing.kg)) : ''}" placeholder="72,5"></label>
+    <p class="hint">${esc(t('weight_replace'))}</p><p class="hint">${esc(t('weight_privacy'))}</p>
+    <div role="alert" data-weight-error></div><button type="submit" class="btn primary block">${esc(t('save'))}</button></form>`;
+  const form = $('[data-weight-form]', sh.body);
+  form.onsubmit = async e => {
+    e.preventDefault();
+    const btn = $('button[type=submit]', form); if (btn.disabled) return;
+    btn.disabled = true;
+    try {
+      const next = upsertWeight(S.settings.weight, form.elements.day.value, form.elements.kg.value);
+      await persistWeight(next); sh.close(); if (onSaved) onSaved(); toast(t('saved'));
+    } catch(err){ $('[data-weight-error]', form).textContent = errMsg(err); btn.disabled = false; }
+  };
+}
+function weightChart(entries){
+  if (entries.length < 2) return '';
+  const points = entries.slice(-60), min = Math.min(...points.map(p=>p.kg)), max = Math.max(...points.map(p=>p.kg));
+  const t0 = Date.parse(points[0].day), span = Date.parse(points[points.length-1].day)-t0 || 1;
+  const range = max-min || 1;
+  const path = points.map(p => `${16+(Date.parse(p.day)-t0)/span*288},${92-(p.kg-min)/range*64}`).join(' ');
+  return `<svg viewBox="0 0 320 120" role="img" aria-label="${esc(t('weight_history'))}" style="width:100%;height:auto;color:var(--accent)"><polyline points="${path}" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/><text x="16" y="16" fill="var(--muted)" font-size="11">${esc(fmt(max,2))} kg</text><text x="16" y="115" fill="var(--muted)" font-size="11">${esc(points[0].day)}</text><text x="304" y="115" text-anchor="end" fill="var(--muted)" font-size="11">${esc(points[points.length-1].day)}</text></svg>`;
+}
+function openWeightHistory(st, readonly){
+  const sh = openSheet({title:t('weight_history'), footer:false});
+  const draw = () => {
+    const w = normalizeWeight((readonly ? st : S.settings).weight);
+    sh.body.innerHTML = `${!readonly ? `<form data-weight-goal><label class="f"><span>${esc(t('weight_goal'))} (kg)</span><input class="inp" name="goal" inputmode="decimal" value="${esc(inputNum(w.goal))}" placeholder="${esc(t('weight_goal_placeholder'))}"></label><p class="hint">${esc(t('weight_goal_hint'))}</p><button class="btn small" type="submit">${esc(t('weight_save_goal'))}</button><div data-goal-error role="alert"></div></form><hr style="border:0;border-top:1px solid var(--line);margin:20px 0">` : ''}
+      ${weightChart(w.entries)}<div style="max-height:340px;overflow:auto">${w.entries.length ? [...w.entries].reverse().map(e => `<div class="list-item"><div class="grow"><b>${esc(fmt(e.kg,2))} kg</b><div class="small muted">${esc(fmtDate(e.day))}</div></div>${readonly ? '' : `<button class="btn small" data-weight-edit="${e.day}">${esc(t('weight_edit'))}</button><button class="btn small danger" data-weight-delete="${e.day}" aria-label="${esc(t('delete'))} ${e.day}">${esc(t('delete'))}</button>`}</div>`).join('') : `<p class="muted">${esc(t('weight_empty'))}</p>`}</div>
+      <p class="hint">${esc(t('weight_privacy'))}</p>`;
+    if (readonly) return;
+    $('[data-weight-goal]',sh.body).onsubmit = async e => {
+      e.preventDefault(); const f=e.target, btn=$('button',f); if (btn.disabled) return;
+      const raw=f.elements.goal.value.trim(), goal=validWeight(raw);
+      if (raw && goal === null){ $('[data-goal-error]',f).textContent=t('weight_invalid'); return; }
+      btn.disabled=true;
+      try { await persistWeight({...normalizeWeight(S.settings.weight),goal}); draw(); toast(t('saved')); }
+      catch(err){ $('[data-goal-error]',f).textContent=errMsg(err); btn.disabled=false; }
+    };
+    $$('[data-weight-edit]',sh.body).forEach(b => b.onclick=()=>openWeightEntry(w.entries.find(e=>e.day===b.dataset.weightEdit),draw));
+    $$('[data-weight-delete]',sh.body).forEach(b => b.onclick=async()=>{
+      if (!await askConfirm(t('weight_delete'),t('delete'),true)) return;
+      b.disabled=true;
+      try { const now=normalizeWeight(S.settings.weight); await persistWeight({...now,entries:now.entries.filter(e=>e.day!==b.dataset.weightDelete)}); draw(); toast(t('deleted')); }
+      catch(err){ toast(errMsg(err),true); b.disabled=false; }
+    });
+  };
+  draw();
+}
+
 /* =====================================================================
    Ustawienia
    ===================================================================== */
@@ -2108,6 +2236,7 @@ function renderSettings(){
     <label class="f"><span>${esc(t('display_name'))}</span><input class="inp" data-dn value="${esc(S.profile.display_name || '')}"></label>
     <p class="small muted">${esc(S.me.email || '')}${S.isAdmin ? ' · <b>'+esc(t('admin'))+'</b>' : ''}</p>
     <div class="row wrap"><button class="btn small" data-pw>${esc(t('change_pw'))}</button><button class="btn small" data-out>${esc(t('sign_out'))}</button></div></div>`;
+  h += weightCard(st, false);
   // Język i wygląd
   h += `<div class="card"><div class="fieldset-h" style="margin-top:0">${esc(t('language'))}</div>
     <div class="seg">${['pl','de','en'].map(l => `<button data-lang="${l}" class="${S.lang===l?'on':''}">${esc(t('lang_'+l))}</button>`).join('')}</div>
@@ -2168,6 +2297,7 @@ function renderSettings(){
   h += `<p class="hint" style="text-align:center;margin:20px 0">${esc(t('app_name'))} · v1.0 · ${esc(t('kcal_rule'))}</p>`;
   v.innerHTML = h;
 
+  bindWeightCard(v, st, false);
   // --- zdarzenia
   $('[data-dn]', v).onchange = async e => {
     try { S.profile = await S.api.updateProfile(S.me.id, {display_name: e.target.value.trim()}); toast(t('saved')); } catch(err){ toast(errMsg(err), true); }
