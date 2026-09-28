@@ -142,7 +142,8 @@ textarea.inp{min-height:110px;resize:vertical;font-family:ui-monospace,Menlo,Con
 .inp:focus{outline:2px solid var(--accent);outline-offset:-1px}
 .seg{display:flex;background:var(--surface2);border-radius:12px;padding:3px;gap:3px}
 .seg button{flex:1;border:0;background:transparent;border-radius:9px;padding:8px 6px;font-weight:600;font-size:14px;color:var(--muted);min-height:38px}
-.seg button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+@media(max-width:440px){.meal-options{grid-template-columns:1fr!important}}
+.source-tabs{display:grid;grid-template-columns:repeat(var(--source-columns,3),minmax(0,1fr))}.source-tabs button:first-child{grid-column:1/-1}.source-tabs button{overflow-wrap:anywhere}.product-details{margin:14px 0;border:1px solid var(--line);border-radius:12px;padding:12px}.product-details summary,.portion-help summary{cursor:pointer;font-weight:600;color:var(--accent)}.portion-help{margin-top:12px}.seg button.on{background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px;font-size:14px;font-weight:600;min-height:36px}
 .chip.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
@@ -263,7 +264,7 @@ pl: {
   meal_name:'Nazwa posiłku', components:'Składniki', no_components:'Dodaj pierwszy składnik.', add_component:'Dodaj składnik', edit_component:'Edytuj składnik',
   from_template:'Z szablonu', no_templates:'Brak szablonów. Zapisz posiłek złożony jako szablon.', to_simple_confirm:'Posiłek prosty ma jedną pozycję – pozostałe składniki zostaną usunięte.',
   v_name:'Podaj nazwę.', v_values:'Wpisz przynajmniej jedną wartość odżywczą.', v_amount:'Podaj zjedzoną ilość.', v_piece:'Podaj masę 1 sztuki/porcji, aby przeliczyć.', v_components:'Dodaj przynajmniej jeden składnik.',
-  src_form:'Ręcznie', src_lib:'Biblioteka', src_off:'Open Food Facts', src_ai:'AI',
+  src_form:'Ręcznie', src_lib:'Biblioteka', src_off:'Szukaj produktu w bazie', src_ai:'AI',
   product_name:'Nazwa', brand_opt:'Marka (opcjonalnie)', values_per:'Wartości podane', optional:'opcjonalnie',
   basis_100g:'na 100 g', basis_100ml:'na 100 ml', basis_piece:'na sztukę/porcję', basis_total:'dla całej porcji',
   piece_g:'1 szt./porcja =', piece_ml:'1 porcja =', total_hint:'Wartości dotyczą dokładnie tego, co zjedzono (np. całe opakowanie gotowego dania).',
@@ -341,7 +342,7 @@ de: {
   meal_name:'Name der Mahlzeit', components:'Komponenten', no_components:'Füge die erste Komponente hinzu.', add_component:'Komponente hinzufügen', edit_component:'Komponente bearbeiten',
   from_template:'Aus Vorlage', no_templates:'Keine Vorlagen. Speichere eine zusammengesetzte Mahlzeit als Vorlage.', to_simple_confirm:'Eine einfache Mahlzeit hat eine Position – die übrigen Komponenten werden entfernt.',
   v_name:'Bitte einen Namen eingeben.', v_values:'Mindestens einen Nährwert eingeben.', v_amount:'Bitte die gegessene Menge eingeben.', v_piece:'Gewicht pro Stück/Portion angeben, um umzurechnen.', v_components:'Mindestens eine Komponente hinzufügen.',
-  src_form:'Manuell', src_lib:'Bibliothek', src_off:'Open Food Facts', src_ai:'KI',
+  src_form:'Manuell', src_lib:'Bibliothek', src_off:'Produkt in Datenbank suchen', src_ai:'KI',
   product_name:'Name', brand_opt:'Marke (optional)', values_per:'Werte angegeben', optional:'optional',
   basis_100g:'pro 100 g', basis_100ml:'pro 100 ml', basis_piece:'pro Stück/Portion', basis_total:'für die ganze Portion',
   piece_g:'1 Stück/Portion =', piece_ml:'1 Portion =', total_hint:'Die Werte gelten genau für das Gegessene (z. B. eine ganze Packung Fertiggericht).',
@@ -419,7 +420,7 @@ en: {
   meal_name:'Meal name', components:'Components', no_components:'Add the first component.', add_component:'Add component', edit_component:'Edit component',
   from_template:'From template', no_templates:'No templates. Save a composite meal as a template.', to_simple_confirm:'A simple meal has one item – other components will be removed.',
   v_name:'Enter a name.', v_values:'Enter at least one nutrient value.', v_amount:'Enter the amount eaten.', v_piece:'Enter the weight of one piece/portion to convert.', v_components:'Add at least one component.',
-  src_form:'Manual', src_lib:'Library', src_off:'Open Food Facts', src_ai:'AI',
+  src_form:'Manual', src_lib:'Library', src_off:'Search product database', src_ai:'AI',
   product_name:'Name', brand_opt:'Brand (optional)', values_per:'Values given', optional:'optional',
   basis_100g:'per 100 g', basis_100ml:'per 100 ml', basis_piece:'per piece/portion', basis_total:'for the whole portion',
   piece_g:'1 piece/portion =', piece_ml:'1 portion =', total_hint:'Values apply exactly to what was eaten (e.g. a whole ready-meal pack).',
@@ -464,9 +465,12 @@ en: {
 }
 };
 
-Object.assign(I18N.pl, {"templates": "Posiłki", "save_template": "Zapisz jako posiłek", "from_template": "Z zapisanych posiłków", "no_templates": "Brak zapisanych posiłków. Dodaj przepis lub zapisz posiłek z dziennika.", "template_saved": "Posiłek zapisany.", "recipe_new": "Nowy przepis", "recipe_steps": "Sposób przygotowania", "recipe_batch": "Liczba porcji w całym przepisie", "recipe_eat": "Ile porcji dodajesz?", "recipe_hint": "Składniki i wartości dotyczą całego przepisu. Przy dodawaniu obliczamy wybrane porcje.", "portion_apply": "Przelicz porcje", "portion_invalid": "Podaj dodatnią liczbę porcji.", "portion_hint": "Podaj liczbę porcji w aktualnych składnikach oraz ile z nich zjadasz. Przeliczenie zmienia ilości składników.", "piece_hint": "Dla całej sztuki wpisz jej masę powyżej. Waga owoców i warzyw zależy od wielkości; najlepiej zważyć.", "supplement": "Dodaj suplement", "supplement_amount": "Ilość składnika w jednej dawce", "supplement_timing": "Kiedy przyjmujesz?", "supplement_hint": "Wpisz ilość składnika z etykiety, np. 185 mg magnezu. Każda zaznaczona pora otrzyma osobny wpis. To zapis przyjętej ilości, nie zalecenie dawkowania.", "n_creatine": "Kreatyna", "scan_unsupported": "Aparat nie jest dostępny. Wpisz kod ręcznie.", "scan_hint": "Zeskanuj kod kreskowy produktu. QR musi zawierać kod produktu lub link Open Food Facts; inne linki nie są otwierane.", "scan_invalid": "Ten kod nie zawiera obsługiwanego numeru produktu.", "scan_err": "Nie można uruchomić aparatu. Sprawdź uprawnienia lub wpisz kod ręcznie.", "off_err": "Baza online chwilowo nie odpowiada. Spróbuj kodu kreskowego lub dodaj produkt ręcznie.", "off_rate": "Limit wyszukiwań. Odczekaj około minutę i spróbuj ponownie."});
+Object.assign(I18N.pl,{product_details:'Dane produktu i wartości odżywcze',piece_help:'Jak dodać całą sztukę lub połowę?',database_about:'O bazie produktów',kind_simple:'Produkt',kind_composite:'Posiłek ze składników',kind_simple_hint:'Wyszukaj produkt, wybierz go i podaj zjedzoną ilość.',src_ai:'Wklej dane AI'});
+Object.assign(I18N.de,{product_details:'Produktdaten und Nährwerte',piece_help:'Ein ganzes oder halbes Stück hinzufügen?',database_about:'Über die Produktdatenbank',kind_simple:'Produkt',kind_composite:'Mahlzeit aus Zutaten',kind_simple_hint:'Produkt suchen, auswählen und verzehrte Menge eingeben.',src_ai:'KI-Daten einfügen'});
+Object.assign(I18N.en,{product_details:'Product details and nutrition',piece_help:'Add a whole or half piece?',database_about:'About the product database',kind_simple:'Product',kind_composite:'Meal with ingredients',kind_simple_hint:'Find a product, select it and enter the amount eaten.',src_ai:'Paste AI data'});
+Object.assign(I18N.pl, {"templates": "Posiłki", "save_template": "Zapisz jako posiłek", "from_template": "Z zapisanych posiłków", "no_templates": "Brak zapisanych posiłków. Dodaj przepis lub zapisz posiłek z dziennika.", "template_saved": "Posiłek zapisany.", "recipe_new": "Nowy przepis", "recipe_steps": "Sposób przygotowania", "recipe_batch": "Liczba porcji w całym przepisie", "recipe_eat": "Ile porcji dodajesz?", "recipe_hint": "Składniki i wartości dotyczą całego przepisu. Przy dodawaniu obliczamy wybrane porcje.", "portion_apply": "Przelicz porcje", "portion_invalid": "Podaj dodatnią liczbę porcji.", "portion_hint": "Podaj liczbę porcji w aktualnych składnikach oraz ile z nich zjadasz. Przeliczenie zmienia ilości składników.", "piece_hint": "Rozwiń dane produktu i wpisz masę jednej sztuki. Waga owoców i warzyw zależy od wielkości; najlepiej zważyć.", "supplement": "Dodaj suplement", "supplement_amount": "Ilość składnika w jednej dawce", "supplement_timing": "Kiedy przyjmujesz?", "supplement_hint": "Wpisz ilość składnika z etykiety, np. 185 mg magnezu. Każda zaznaczona pora otrzyma osobny wpis. To zapis przyjętej ilości, nie zalecenie dawkowania.", "n_creatine": "Kreatyna", "scan_unsupported": "Aparat nie jest dostępny. Wpisz kod ręcznie.", "scan_hint": "Zeskanuj kod kreskowy produktu. QR musi zawierać kod produktu lub link Open Food Facts; inne linki nie są otwierane.", "scan_invalid": "Ten kod nie zawiera obsługiwanego numeru produktu.", "scan_err": "Nie można uruchomić aparatu. Sprawdź uprawnienia lub wpisz kod ręcznie.", "off_err": "Baza online chwilowo nie odpowiada. Spróbuj kodu kreskowego lub dodaj produkt ręcznie.", "off_rate": "Limit wyszukiwań. Odczekaj około minutę i spróbuj ponownie."});
 Object.assign(I18N.de, {"templates": "Mahlzeiten", "save_template": "Als Mahlzeit speichern", "from_template": "Aus gespeicherten Mahlzeiten", "no_templates": "Noch keine Mahlzeiten. Lege ein Rezept an oder speichere eine Mahlzeit aus dem Tagebuch.", "template_saved": "Mahlzeit gespeichert.", "recipe_new": "Neues Rezept", "recipe_steps": "Zubereitung", "recipe_batch": "Portionen im gesamten Rezept", "recipe_eat": "Wie viele Portionen hinzufügen?", "recipe_hint": "Zutaten und Werte gelten für das ganze Rezept. Beim Hinzufügen berechnen wir die gewählten Portionen.", "portion_apply": "Portionen umrechnen", "portion_invalid": "Gib eine positive Portionsanzahl ein.", "portion_hint": "Gib an, wie viele Portionen die aktuellen Zutaten ergeben und wie viele du isst. Die Umrechnung verändert die Zutatenmengen.", "piece_hint": "Trage für ganze Stücke oben das Stückgewicht ein. Obst und Gemüse sind unterschiedlich groß; am besten wiegen.", "supplement": "Supplement hinzufügen", "supplement_amount": "Nährstoffmenge pro Einnahme", "supplement_timing": "Wann nimmst du es ein?", "supplement_hint": "Trage die Menge laut Etikett ein, z. B. 185 mg Magnesium. Jede ausgewählte Tageszeit erhält einen eigenen Eintrag. Dies protokolliert die Einnahme und ist keine Dosierungsempfehlung.", "n_creatine": "Kreatin", "scan_unsupported": "Keine Kamera verfügbar. Gib den Code manuell ein.", "scan_hint": "Scanne den Produktbarcode. QR muss eine Produktnummer oder einen Open-Food-Facts-Link enthalten; andere Links werden nicht geöffnet.", "scan_invalid": "Dieser Code enthält keine unterstützte Produktnummer.", "scan_err": "Kamera konnte nicht gestartet werden. Prüfe die Berechtigung oder gib den Code ein.", "off_err": "Die Online-Datenbank antwortet gerade nicht. Versuche einen Barcode oder lege das Produkt manuell an.", "off_rate": "Suchlimit erreicht. Warte etwa eine Minute und versuche es erneut."});
-Object.assign(I18N.en, {"templates": "Meals", "save_template": "Save as meal", "from_template": "From saved meals", "no_templates": "No saved meals. Create a recipe or save a meal from your diary.", "template_saved": "Meal saved.", "recipe_new": "New recipe", "recipe_steps": "Instructions", "recipe_batch": "Servings in the entire recipe", "recipe_eat": "How many servings to add?", "recipe_hint": "Ingredients and values describe the entire recipe. We calculate the selected servings when adding it.", "portion_apply": "Scale servings", "portion_invalid": "Enter a positive number of servings.", "portion_hint": "Enter how many servings the current ingredients make and how many you eat. Scaling changes ingredient amounts.", "piece_hint": "For whole pieces, enter their weight above. Fruit and vegetable sizes vary; weighing is best.", "supplement": "Add supplement", "supplement_amount": "Nutrient amount per dose", "supplement_timing": "When do you take it?", "supplement_hint": "Enter the nutrient amount from the label, e.g. 185 mg magnesium. Each selected meal time gets a separate entry. This records intake, not a dosage recommendation.", "n_creatine": "Creatine", "scan_unsupported": "Camera unavailable. Enter the code manually.", "scan_hint": "Scan the product barcode. QR must contain a product code or Open Food Facts link; other links are not opened.", "scan_invalid": "This code does not contain a supported product number.", "scan_err": "Camera could not start. Check permission or enter the code manually.", "off_err": "The online database is not responding. Try a barcode or add the product manually.", "off_rate": "Search limit reached. Wait about a minute and try again."});
+Object.assign(I18N.en, {"templates": "Meals", "save_template": "Save as meal", "from_template": "From saved meals", "no_templates": "No saved meals. Create a recipe or save a meal from your diary.", "template_saved": "Meal saved.", "recipe_new": "New recipe", "recipe_steps": "Instructions", "recipe_batch": "Servings in the entire recipe", "recipe_eat": "How many servings to add?", "recipe_hint": "Ingredients and values describe the entire recipe. We calculate the selected servings when adding it.", "portion_apply": "Scale servings", "portion_invalid": "Enter a positive number of servings.", "portion_hint": "Enter how many servings the current ingredients make and how many you eat. Scaling changes ingredient amounts.", "piece_hint": "Expand product details and enter the weight of one piece. Fruit and vegetable sizes vary; weighing is best.", "supplement": "Add supplement", "supplement_amount": "Nutrient amount per dose", "supplement_timing": "When do you take it?", "supplement_hint": "Enter the nutrient amount from the label, e.g. 185 mg magnesium. Each selected meal time gets a separate entry. This records intake, not a dosage recommendation.", "n_creatine": "Creatine", "scan_unsupported": "Camera unavailable. Enter the code manually.", "scan_hint": "Scan the product barcode. QR must contain a product code or Open Food Facts link; other links are not opened.", "scan_invalid": "This code does not contain a supported product number.", "scan_err": "Camera could not start. Check permission or enter the code manually.", "off_err": "The online database is not responding. Try a barcode or add the product manually.", "off_rate": "Search limit reached. Wait about a minute and try again."});
 
 Object.assign(I18N.pl, {"shopping": "Zakupy", "shopping_name": "Produkt", "shopping_quantity": "Ilość (np. 2 szt., 500 g)", "shopping_private": "Moja lista", "shopping_shared": "Lista rodzinna", "shopping_hint": "Lista rodzinna jest widoczna dla wszystkich kont w aplikacji. Każdy może oznaczać zakupy; usuwać wpis może jego autor.", "shopping_empty": "Lista jest pusta.", "shopping_refresh": "Odśwież", "shopping_category": "Kategoria", "shop_produce": "Owoce i warzywa", "shop_chilled": "Nabiał i chłodzone", "shop_pantry": "Produkty suche", "shop_other": "Inne", "shopping_search": "Szukaj na liście…"});
 Object.assign(I18N.de, {"shopping": "Einkauf", "shopping_name": "Produkt", "shopping_quantity": "Menge (z. B. 2 Stück, 500 g)", "shopping_private": "Meine Liste", "shopping_shared": "Familienliste", "shopping_hint": "Die Familienliste sehen alle App-Konten. Jeder kann Einkäufe abhaken; löschen kann sie der Verfasser.", "shopping_empty": "Die Liste ist leer.", "shopping_refresh": "Aktualisieren", "shopping_category": "Kategorie", "shop_produce": "Obst und Gemüse", "shop_chilled": "Milchprodukte und Kühlware", "shop_pantry": "Vorräte", "shop_other": "Sonstiges", "shopping_search": "Liste durchsuchen…"});
@@ -1669,19 +1673,20 @@ function mountItemEditor(host, opts){
   const foodMode = opts.mode === 'food';
   const E = {
     item: opts.item ? clone(opts.item) : newItem(),
-    tab: opts.tab || (opts.item ? 'form' : (foodMode ? 'form' : (S.foods.some(f => f.kind === 'food') ? 'lib' : 'form'))),
+    tab: opts.tab || (opts.item ? 'form' : 'off'),
+    detailsOpen: null,
     showAll: false, q: '', libFilter: 'all',
     off: {q:'', code:'', cc: S.lang === 'de' ? 'de' : S.lang === 'en' ? 'world' : 'pl', results:null, loading:false, err:null},
     ai: {text:'', err:null, name:''}
   };
   if (!E.item.unit) E.item.unit = defaultUnit(E.item.basis);
-  const tabs = foodMode ? ['form','off','ai'] : ['form','lib','off','ai'];
-  host.innerHTML = `<div class="seg" style="margin-top:12px" data-tabs>${tabs.map(x => `<button data-t="${x}">${esc(t('src_'+x))}</button>`).join('')}</div><div data-body></div>`;
+  const tabs = foodMode ? ['off','form','ai'] : ['off','lib','form','ai'];
+  host.innerHTML = `<div class="seg source-tabs" style="margin-top:12px;--source-columns:${tabs.length-1}" data-tabs>${tabs.map(x => `<button data-t="${x}">${esc(t('src_'+x))}</button>`).join('')}</div><div data-body></div>`;
   const body = $('[data-body]', host);
   $$('[data-t]', host).forEach(b => b.onclick = () => { stopScan(); E.tab = b.dataset.t; render(); });
 
   function render(){
-    $$('[data-t]', host).forEach(b => b.classList.toggle('on', b.dataset.t === E.tab));
+    $$('[data-t]', host).forEach(b => { b.classList.toggle('on', b.dataset.t === E.tab); b.setAttribute('aria-pressed', String(b.dataset.t === E.tab)); });
     if (E.tab === 'form') renderForm();
     else if (E.tab === 'lib') renderLib();
     else if (E.tab === 'off') renderOff();
@@ -1703,14 +1708,16 @@ function mountItemEditor(host, opts){
   }
   function renderForm(){
     const it = E.item;
-    const vis = [...new Set([...visibleNutrients(), ...allNutrientKeys().filter(k => parseNum(it.n[k]) !== null)])];
+    const vis = ['kcal','carbs','protein','fat'];
     const rest = allNutrientKeys().filter(k => !vis.includes(k));
     const basisOpts = foodMode ? ['100g','100ml','piece'] : ['100g','100ml','piece','total'];
     const fromLib = it.food_id ? S.foods.find(f => f.id === it.food_id) : null;
+    const detailsOpen = E.detailsOpen ?? (!it.food_id && it.source !== 'off' && it.source !== 'ai');
     let h = '';
     if (it.source === 'off') h += `<div class="info-box small">${esc(t('off_check'))}</div>`;
     if (it.source === 'ai') h += `<div class="info-box small">${esc(t('ai_check'))}</div>`;
     h += `<label class="f"><span>${esc(t('product_name'))} *</span><input class="inp" data-f="name" value="${esc(it.name)}" autocomplete="off"></label>
+      <details class="product-details" data-product-details ${detailsOpen?'open':''}><summary>${esc(t('product_details'))}</summary>
       <label class="f"><span>${esc(t('brand_opt'))}</span><input class="inp" data-f="brand" value="${esc(it.brand||'')}" autocomplete="off"></label>
       <div class="grid2">
         <label class="f"><span>${esc(t('values_per'))}</span><select class="inp" data-f="basis">${basisOpts.map(b => `<option value="${b}" ${it.basis===b?'selected':''}>${esc(basisLabel(b))}</option>`).join('')}</select></label>
@@ -1727,15 +1734,16 @@ function mountItemEditor(host, opts){
         h += `<div class="fieldset-h">${esc(t('grp_'+g))}</div><div class="ngrid">${ks.map(nutField).join('')}</div>`;
       }
     }
+    h += '</details>';
     if (!foodMode){
       if (it.basis !== 'total'){
         const uo = unitOptions();
         if (!uo.includes(it.unit)) it.unit = uo[0];
         h += `<div class="fieldset-h">${esc(t('eaten_amount'))}</div><div class="grid2">
           <label class="f"><span>${esc(t('amount'))} *</span><input class="inp num" inputmode="decimal" data-f="amount" value="${esc(inputNum(parseNum(it.amount)))}"></label>
-          <label class="f"><span>${esc(t('unit'))}</span><select class="inp" data-f="unit">${uo.map(u => `<option value="${u}" ${it.unit===u?'selected':''}>${esc(unitLabel(u))}</option>`).join('')}</select></label></div>`;
+          <label class="f"><span>${esc(t('unit'))}</span><select class="inp" data-f="unit" ${uo.length===1?'disabled':''}>${uo.map(u => `<option value="${u}" ${it.unit===u?'selected':''}>${esc(unitLabel(u))}</option>`).join('')}</select></label></div>`;
       }
-      if (it.basis !== 'total') h += `<div class="row wrap" style="margin-top:10px">${(parseNum(it.piece_g)>0 || it.basis==='piece') ? [0.5,1,2].map(a=>`<button type="button" class="btn small" data-quick-piece="${a}">${esc(fmt(a))} ${esc(t('unit_pc'))}</button>`).join('') : ''}${it.basis==='100g' ? [100,150,200,250].map(a=>`<button type="button" class="btn small" data-quick-g="${a}">${a} g</button>`).join('') : ''}</div>${it.basis==='100g' ? `<p class="hint">${esc(t('piece_hint'))}</p>` : ''}`;
+      if (it.basis !== 'total') h += `<div class="row wrap" style="margin-top:10px">${it.unit==='pc' ? [0.5,1,2].map(a=>`<button type="button" class="btn small" data-quick-piece="${a}">${esc(fmt(a))} ${esc(t('unit_pc'))}</button>`).join('') : ''}${it.basis==='100g' && it.unit==='g' ? [100,150,200,250].map(a=>`<button type="button" class="btn small" data-quick-g="${a}">${a} g</button>`).join('') : ''}</div>${it.basis==='100g' && !(parseNum(it.piece_g)>0) ? `<details class="portion-help"><summary>${esc(t('piece_help'))}</summary><p class="hint">${esc(t('piece_hint'))}</p></details>` : ''}`;
       h += `<div class="calc" data-calc></div>`;
       if (it.basis !== 'total'){
         if (!it.food_id){
@@ -1749,6 +1757,8 @@ function mountItemEditor(host, opts){
       }
     }
     body.innerHTML = h;
+    const details = $('[data-product-details]',body);
+    details.ontoggle = () => { E.detailsOpen = details.open; };
     // zdarzenia
     $$('[data-f]', body).forEach(inp => {
       const f = inp.dataset.f;
@@ -1820,13 +1830,13 @@ function mountItemEditor(host, opts){
     if (!foods.length){
       L.innerHTML = `<div class="empty">${esc(nq ? t('lib_no_match') : t('lib_empty'))}</div>
         <button class="btn block" data-new>${esc(t('enter_manually'))}</button>`;
-      $('[data-new]', L).onclick = () => { E.item = newItem(); E.item.name = E.q; E.tab = 'form'; render(); };
+      $('[data-new]', L).onclick = () => { E.item = newItem(); E.detailsOpen = true; E.item.name = E.q; E.tab = 'form'; render(); };
       return;
     }
     L.innerHTML = foods.slice(0, 150).map(f => foodRow(f)).join('');
     $$('[data-fid]', L).forEach(b => b.onclick = () => {
       const f = S.foods.find(x => x.id === b.dataset.fid);
-      E.item = itemFromFood(f); E.tab = 'form'; render();
+      E.item = itemFromFood(f); E.detailsOpen = false; E.tab = 'form'; render();
       setTimeout(() => { const a = $('[data-f="amount"]', body); a && a.focus(); a && a.select && a.select(); }, 30);
     });
   }
@@ -1850,9 +1860,11 @@ function mountItemEditor(host, opts){
       <div data-scanbox></div><p class="hint">${esc(t('scan_hint'))}</p>
       ${canScan ? '' : `<p class="hint">${esc(t('scan_unsupported'))}</p>`}
       <div data-offres style="margin-top:6px"></div>
-      <p class="hint">${esc(t('off_note'))}</p>`;
+      <details class="portion-help"><summary>${esc(t('database_about'))}</summary><p class="hint">${esc(t('off_note'))}</p></details>`;
     body.innerHTML = h;
-    $$('[data-cc]', body).forEach(b => b.onclick = () => { o.cc = b.dataset.cc; renderOff(); });
+    $('[data-offs] input',body).oninput=e=>{o.q=e.target.value;};
+    $('[data-offc] input',body).oninput=e=>{o.code=e.target.value;};
+    $$('[data-cc]', body).forEach(b => b.onclick = () => { if(o.loading)return; o.cc = b.dataset.cc; o.results=null; o.err=null; renderOff(); });
     $('[data-offs]', body).onsubmit = async e => {
       e.preventDefault(); if(o.loading) return; o.q = e.target.q.value.trim(); if (!o.q) return;
       o.loading = true; o.err = null; drawOff();
@@ -1869,11 +1881,13 @@ function mountItemEditor(host, opts){
     if(o.loading) return;
     code=productCode(code); if(!code){o.err=t('scan_invalid');drawOff();return;}
     const local = S.foods.find(f => f.barcode && f.barcode === code && f.kind === 'food');
-    if (local){ toast(t('found_in_lib')); E.item = itemFromFood(local); E.tab = 'form'; render(); return; }
+    if (local){ toast(t('found_in_lib')); E.item = itemFromFood(local); E.detailsOpen = false; E.tab = 'form'; render(); return; }
     o.loading = true; o.err = null; drawOff();
     try {
+      const requestGeneration=scanGeneration;
       const f = await OFF.byCode(code, S.lang);
       o.loading = false;
+      if(requestGeneration!==scanGeneration)return;
       if (!f){ o.err = t('off_notfound'); drawOff(); return; }
       pickOff(f);
     } catch(err){ o.loading = false; o.err = err.message==='rate' ? t('off_rate') : t('off_err'); drawOff(); }
@@ -1881,15 +1895,18 @@ function mountItemEditor(host, opts){
   function pickOff(f){
     const it = itemFromFood({...f, id:null});
     it.source = 'off'; it._save = true;
-    E.item = it; E.tab = 'form'; render();
+    E.item = it; E.detailsOpen = false; E.tab = 'form'; render();
   }
   function drawOff(){
     const R = $('[data-offres]', body); if (!R) return;
     const o = E.off;
     if (o.loading){ R.innerHTML = '<div class="spinner"></div>'; return; }
-    if (o.err){ R.innerHTML = `<div class="err-box">${esc(o.err)}</div>`; return; }
+    if (o.err || (o.results && !o.results.length)){
+      R.innerHTML = `<div class="${o.err?'err-box':'empty'}">${esc(o.err || t('off_none'))}</div><button class="btn block" data-offmanual>${esc(t('enter_manually'))}</button>`;
+      $('[data-offmanual]',R).onclick=()=>{E.item=newItem();E.item.name=o.q;E.detailsOpen=true;E.tab='form';render();};
+      return;
+    }
     if (!o.results){ R.innerHTML = ''; return; }
-    if (!o.results.length){ R.innerHTML = `<div class="empty">${esc(t('off_none'))}</div>`; return; }
     R.innerHTML = o.results.map((f, i) => `<button class="list-item" data-oi="${i}"><div class="grow"><div class="t ellipsis">${esc(f.name || '—')}</div><div class="s ellipsis">${esc([f.brand, f.quantity].filter(Boolean).join(' · '))}</div></div><div class="num small">${isNum(f.n.kcal) ? esc(fmt(f.n.kcal,0))+' kcal' : '–'}<div class="muted">${esc(basisLabel(f.basis))}</div></div></button>`).join('');
     $$('[data-oi]', R).forEach(b => b.onclick = () => pickOff(o.results[Number(b.dataset.oi)]));
   }
@@ -1953,7 +1970,7 @@ function mountItemEditor(host, opts){
         });
         if (!items.length) throw new Error('empty');
         if (items.length > 1 && opts.onMany){ opts.onMany(items); return; }
-        E.item = items[0]; E.tab = 'form'; render();
+        E.item = items[0]; E.detailsOpen=false; E.tab = 'form'; render();
       } catch(e){ errBox.innerHTML = `<div class="err-box">${esc(t('ai_parse_err'))}</div>`; }
     };
   }
@@ -1962,7 +1979,7 @@ function mountItemEditor(host, opts){
   return {
     get(){ return E.item; },
     validate(){ return validateItem(E.item, foodMode); },
-    show(tab){ E.tab = tab; render(); },
+    show(tab){ E.tab = tab; const error=validateItem(E.item,foodMode); if(tab==='form' && [t('v_values'),t('v_piece')].includes(error))E.detailsOpen=true; render(); },
     destroy(){ stopScan(); }
   };
 }
@@ -2007,7 +2024,7 @@ function openMealEditor(meal, presetType, prefill){
   let ed = null;
   const sh = openSheet({title: editing ? t('edit_meal') : t('add_meal'), onClose: () => ed && ed.destroy()});
   sh.body.innerHTML = `${!editing ? `<button class="btn small" data-supplement>${esc(t('supplement'))}</button>` : ''}<div class="chips" style="margin-top:12px" data-types></div>
-    <div class="grid2" style="margin-top:10px">
+    <div class="grid2 meal-options" style="margin-top:10px">
       <div class="seg" data-kind><button data-k="simple">${esc(t('kind_simple'))}</button><button data-k="composite">${esc(t('kind_composite'))}</button></div>
       <div class="seg" data-status><button data-s="eaten">${esc(t('eaten'))}</button><button data-s="planned">${esc(t('planned'))}</button></div>
     </div>
