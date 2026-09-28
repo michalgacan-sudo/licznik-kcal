@@ -481,6 +481,9 @@ Object.assign(I18N.en, {"ul_title": "Optional upper intake warnings", "ul_enable
 Object.assign(I18N.pl, {"n_epa": "EPA", "n_dha": "DHA", "n_omega3": "Omega-3 łącznie", "omega_hint": "EPA i DHA są częściami omega-3. Wpisz osobno ilości z etykiety; nie dodajemy ich ponownie do tłuszczu ani kalorii. Nieznany podział pozostaje pusty."});
 Object.assign(I18N.de, {"n_epa": "EPA", "n_dha": "DHA", "n_omega3": "Omega-3 gesamt", "omega_hint": "EPA und DHA sind Bestandteile von Omega-3. Mengen getrennt vom Etikett übernehmen; sie werden nicht zusätzlich zu Fett oder Kalorien addiert. Unbekannte Einzelwerte bleiben leer."});
 Object.assign(I18N.en, {"n_epa": "EPA", "n_dha": "DHA", "n_omega3": "Omega-3 total", "omega_hint": "EPA and DHA are components of omega-3. Enter label amounts separately; they are not added again to fat or calories. Unknown individual amounts stay blank."});
+Object.assign(I18N.pl, {"photo_add": "Lista ze zdjęcia", "photo_notice": "Wybrane zdjęcie zostanie wysłane przez Supabase do OpenRouter i ModelRun (Modular). Nie wysyłaj danych osobowych ani medycznych. Zdjęcie nie jest zapisywane w naszej bazie. Funkcja tylko dla dorosłych. Sprawdź wynik przed dodaniem.", "photo_choose": "Wybierz zdjęcie (JPG, PNG lub WebP)", "photo_send": "Wyślij zdjęcie do analizy", "photo_consent": "Mam 18 lat i zgadzam się na przesłanie tego zdjęcia wymienionym usługom.", "photo_review": "Sprawdź nazwy i ilości. Odznacz niepotrzebne pozycje.", "photo_empty": "Nie odczytano produktów. Spróbuj wyraźniejszego zdjęcia.", "photo_error": "Analiza niedostępna. Spróbuj później lub wpisz produkty ręcznie.", "photo_limit": "Limit zdjęć został osiągnięty. Spróbuj jutro lub dodaj ręcznie.", "photo_size": "Wybierz JPG, PNG lub WebP do 12 MB.", "photo_demo": "Analiza online jest dostępna po zalogowaniu do prawdziwego konta.", "photo_uncertain": "Sprawdź odczyt", "photo_save": "Dodaj zaznaczone", "photo_loading": "Analizuję…", "photo_target": "Lista docelowa", "photo_partial": "Nie wszystkie pozycje zapisano. Zapisane pozycje zostały odznaczone; pozostałe możesz ponowić."});
+Object.assign(I18N.de, {"photo_add": "Liste aus Foto", "photo_notice": "Das ausgewählte Foto wird über Supabase an OpenRouter und ModelRun (Modular) gesendet. Keine persönlichen oder medizinischen Daten hochladen. Das Foto wird nicht in unserer Datenbank gespeichert. Nur für Erwachsene. Ergebnis vor dem Hinzufügen prüfen.", "photo_choose": "Foto auswählen (JPG, PNG oder WebP)", "photo_send": "Foto zur Analyse senden", "photo_consent": "Ich bin mindestens 18 Jahre alt und stimme der Übertragung dieses Fotos an die genannten Dienste zu.", "photo_review": "Namen und Mengen prüfen. Nicht benötigte Einträge abwählen.", "photo_empty": "Keine Produkte erkannt. Versuche ein deutlicheres Foto.", "photo_error": "Analyse nicht verfügbar. Später versuchen oder Produkte manuell eintragen.", "photo_limit": "Fotolimit erreicht. Morgen versuchen oder manuell eintragen.", "photo_size": "JPG, PNG oder WebP bis 12 MB auswählen.", "photo_demo": "Online-Analyse ist nach Anmeldung mit einem echten Konto verfügbar.", "photo_uncertain": "Erkennung prüfen", "photo_save": "Ausgewählte hinzufügen", "photo_loading": "Foto wird analysiert…", "photo_target": "Zielliste", "photo_partial": "Nicht alle Einträge wurden gespeichert. Gespeicherte sind abgewählt; die übrigen kannst du erneut versuchen."});
+Object.assign(I18N.en, {"photo_add": "List from photo", "photo_notice": "The selected photo is sent through Supabase to OpenRouter and ModelRun (Modular). Do not upload personal or medical data. The photo is not stored in our database. Adults only. Review results before adding.", "photo_choose": "Choose photo (JPG, PNG or WebP)", "photo_send": "Send photo for analysis", "photo_consent": "I am at least 18 and agree to send this photo to the named services.", "photo_review": "Check names and quantities. Deselect unwanted items.", "photo_empty": "No products recognized. Try a clearer photo.", "photo_error": "Analysis unavailable. Try later or enter products manually.", "photo_limit": "Photo limit reached. Try tomorrow or enter manually.", "photo_size": "Choose JPG, PNG or WebP up to 12 MB.", "photo_demo": "Online analysis requires signing in with a real account.", "photo_uncertain": "Check recognition", "photo_save": "Add selected", "photo_loading": "Analyzing…", "photo_target": "Destination list", "photo_partial": "Some items were not saved. Saved items have been deselected; retry the remaining items."});
 const CONFIG = {
   SUPABASE_URL: 'https://eflekngwbxukusydcyhg.supabase.co',        // np. 'https://abcdefgh.supabase.co'
   SUPABASE_ANON_KEY: 'sb_publishable_W80f9qIQSnObLKWRIImS6Q_YIJlDckT'    // klucz "anon public" (jest publiczny z założenia – chroni go RLS)
@@ -2289,10 +2292,11 @@ const SHOP_CATEGORIES=['produce','chilled','pantry','other'];
 async function renderShopping(){
   const v=$('#view'),version=++SHOP.version,shared=SHOP.shared;
   v.innerHTML=`<div class="seg" style="margin-top:12px"><button data-scope="private" class="${shared?'':'on'}">${esc(t('shopping_private'))}</button><button data-scope="shared" class="${shared?'on':''}">${esc(t('shopping_shared'))}</button></div><p class="hint">${esc(t('shopping_hint'))}</p>
-    <form class="card" data-shop-form><label class="f"><span>${esc(t('shopping_name'))}</span><input class="inp" name="product" required maxlength="200"></label><label class="f"><span>${esc(t('shopping_quantity'))}</span><input class="inp" name="quantity" maxlength="100"></label><label class="f"><span>${esc(t('shopping_category'))}</span><select class="inp" name="category">${SHOP_CATEGORIES.map(c=>`<option value="${c}">${esc(t('shop_'+c))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('add'))}</button><div role="alert" data-shop-error></div></form>
+    <button class="btn block" data-photo>${esc(t('photo_add'))}</button><form class="card" data-shop-form><label class="f"><span>${esc(t('shopping_name'))}</span><input class="inp" name="product" required maxlength="200"></label><label class="f"><span>${esc(t('shopping_quantity'))}</span><input class="inp" name="quantity" maxlength="100"></label><label class="f"><span>${esc(t('shopping_category'))}</span><select class="inp" name="category">${SHOP_CATEGORIES.map(c=>`<option value="${c}">${esc(t('shop_'+c))}</option>`).join('')}</select></label><button class="btn primary" type="submit">${esc(t('add'))}</button><div role="alert" data-shop-error></div></form>
     <div class="row"><input class="inp grow" data-shop-q placeholder="${esc(t('shopping_search'))}" value="${esc(SHOP.q)}"><button class="btn small" data-shop-refresh>${esc(t('shopping_refresh'))}</button></div><div data-shop-list class="card"><div class="spinner"></div></div>`;
   $$('[data-scope]',v).forEach(b=>b.onclick=()=>{SHOP.shared=b.dataset.scope==='shared';renderShopping();});
   $('[data-shop-refresh]',v).onclick=()=>renderShopping();
+  $('[data-photo]',v).onclick=()=>openShoppingPhoto(shared);
   $('[data-shop-form]',v).onsubmit=async e=>{
     e.preventDefault();const f=e.target,btn=$('button[type=submit]',f);if(btn.disabled)return;
     const name=f.elements.product.value.trim();if(!name)return;btn.disabled=true;
@@ -2314,6 +2318,72 @@ async function renderShopping(){
   $('[data-shop-q]',v).oninput=e=>{SHOP.q=e.target.value;draw();};
   try{rows=await S.api.listShopping(shared);draw();}
   catch(err){if(S.tab==='shop'&&version===SHOP.version)$('[data-shop-list]',v).textContent=errMsg(err);}
+}
+
+
+function validatePhotoItems(value){
+ if(!value||!Array.isArray(value.items)||value.items.length>40)throw new Error('output');
+ return value.items.map(x=>{
+  if(!x||typeof x.name!=='string'||!x.name.trim()||x.name.length>200||typeof x.quantity!=='string'||x.quantity.length>100||!SHOP_CATEGORIES.includes(x.category)||typeof x.uncertain!=='boolean'||typeof x.note!=='string'||x.note.length>300)throw new Error('output');
+  return {name:x.name.trim(),quantity:x.quantity.trim(),category:x.category,uncertain:x.uncertain,note:x.note};
+ });
+}
+async function prepareShoppingPhoto(file){
+ if(!file||!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>12*1024*1024)throw new Error('image_size');
+ const url=URL.createObjectURL(file);
+ try{
+  const img=new Image();img.src=url;await img.decode();
+  if(!img.naturalWidth||img.naturalWidth*img.naturalHeight>60000000)throw new Error('image_size');
+  const scale=Math.min(1,1600/Math.max(img.naturalWidth,img.naturalHeight));
+  const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.naturalWidth*scale));canvas.height=Math.max(1,Math.round(img.naturalHeight*scale));
+  const ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+  const data=canvas.toDataURL('image/jpeg',0.88);if(data.length>2800000)throw new Error('image_size');return data;
+ }finally{URL.revokeObjectURL(url);}
+}
+function openShoppingPhoto(shared){
+ if(S.api.demo){toast(t('photo_demo'));return;}
+ let active=true,busy=false,image=null,controller=null,selectionVersion=0;
+ const sh=openSheet({title:t('photo_add'),onClose:()=>{active=false;selectionVersion++;image=null;controller?.abort();}});
+ sh.body.innerHTML=`<p class="hint">${esc(t('photo_notice'))}</p><p><b>${esc(t('photo_target'))}: ${esc(t(shared?'shopping_shared':'shopping_private'))}</b></p><label class="f"><span>${esc(t('photo_choose'))}</span><input class="inp" type="file" accept="image/jpeg,image/png,image/webp" data-photo-file></label><img data-preview alt="" hidden style="max-width:100%;max-height:240px;object-fit:contain"><label class="toggle-row"><span>${esc(t('photo_consent'))}</span><input type="checkbox" data-consent></label><div role="alert" data-error></div><div data-results></div>`;
+ sh.foot.innerHTML=`<button class="btn primary" data-analyze disabled>${esc(t('photo_send'))}</button>`;
+ const input=$('[data-photo-file]',sh.body),button=$('[data-analyze]',sh.foot),consent=$('[data-consent]',sh.body),err=$('[data-error]',sh.body);
+ const enabled=()=>button.disabled=busy||!image||!consent.checked;
+ consent.onchange=enabled;
+ input.onchange=async()=>{
+  const version=++selectionVersion;image=null;enabled();err.textContent='';$('[data-preview]',sh.body).hidden=true;$('[data-results]',sh.body).innerHTML='';
+  try{const data=await prepareShoppingPhoto(input.files[0]);if(!active||version!==selectionVersion)return;image=data;const preview=$('[data-preview]',sh.body);preview.src=data;preview.hidden=false;enabled();}
+  catch(e){if(active&&version===selectionVersion)err.textContent=t('photo_size');}
+ };
+ button.onclick=async()=>{
+  if(busy||!image||!consent.checked)return;busy=true;enabled();input.disabled=true;err.textContent=t('photo_loading');
+  controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),75000);
+  try{
+   const {data:sessionData,error}=await S.api.sb.auth.getSession();if(error||!sessionData.session)throw new Error('auth');
+   const response=await fetch(CONFIG.SUPABASE_URL+'/functions/v1/shopping-photo',{method:'POST',headers:{Authorization:'Bearer '+sessionData.session.access_token,apikey:CONFIG.SUPABASE_ANON_KEY,'Content-Type':'application/json'},body:JSON.stringify({image,lang:S.lang,consent:true}),signal:controller.signal});
+   const result=await response.json();if(!response.ok)throw new Error(response.status===429?'limit':'unavailable');
+   const items=validatePhotoItems(result);if(!active)return;err.textContent='';
+   if(!items.length){err.textContent=t('photo_empty');return;}
+   // A successful response is reviewed once. No automatic second call or automatic save.
+   input.disabled=true;button.hidden=true;consent.disabled=true;
+   const box=$('[data-results]',sh.body);box.innerHTML=`<p>${esc(t('photo_review'))}</p>`+items.map((x,i)=>`<div class="card" data-row="${i}"><label class="toggle-row"><span>${esc(x.uncertain?t('photo_uncertain'):t('add'))}</span><input type="checkbox" data-selected ${x.uncertain?'':'checked'}></label>${x.note?`<p class="hint">${esc(x.note)}</p>`:''}<label class="f"><span>${esc(t('shopping_name'))}</span><input class="inp" data-name maxlength="200" value="${esc(x.name)}"></label><label class="f"><span>${esc(t('shopping_quantity'))}</span><input class="inp" data-quantity maxlength="100" value="${esc(x.quantity)}"></label><select class="inp" aria-label="${esc(t('shopping_category'))}" data-category>${SHOP_CATEGORIES.map(c=>`<option value="${c}" ${c===x.category?'selected':''}>${esc(t('shop_'+c))}</option>`).join('')}</select></div>`).join('');
+   const save=document.createElement('button');save.className='btn primary';save.textContent=t('photo_save');sh.foot.append(save);
+   save.onclick=async()=>{
+    if(save.disabled)return;
+    const rows=$$('[data-row]',box).filter(r=>$('[data-selected]',r).checked&&!r.dataset.saved);
+    if(!rows.length)return;
+    if(rows.some(r=>!$('[data-name]',r).value.trim())){err.textContent=t('shopping_name');return;}
+    save.disabled=true;let failed=false;
+    for(const row of rows){
+     try{await S.api.addShopping({name:$('[data-name]',row).value.trim(),quantity:$('[data-quantity]',row).value.trim(),category:$('[data-category]',row).value,shared});row.dataset.saved='1';$$('input,select',row).forEach(x=>x.disabled=true);$('[data-selected]',row).checked=false;}
+     catch{failed=true;break;}
+    }
+    if(!active)return;
+    if(failed){err.textContent=t('photo_partial');save.disabled=false;return;}
+    sh.close();if(S.tab==='shop')await renderShopping();toast(t('added'));
+   };
+  }catch(e){if(active)err.textContent=t(e.message==='limit'?'photo_limit':'photo_error');}
+  finally{clearTimeout(timeout);busy=false;if(active){input.disabled=button.hidden;enabled();}}
+ };
 }
 
 const UL_SOURCE='https://www.efsa.europa.eu/sites/default/files/2024-05/ul-summary-report.pdf';
